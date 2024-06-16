@@ -1,33 +1,32 @@
 <template>
   <Teleport to="body">
     <form @submit.prevent="registerBark">
-      <modal :show="showModal" @close="$emit('close')">
+      <modal-base :show="store.showBarkCompose" @close="store.toggleBarkCompose">
         <template #header>
           <h3>Bark Register</h3>
         </template>
         <template #body>
-          <input type="text" v-model="bark" />
+          <input type="text" v-model="content" />
         </template>
         <template #footer>
           <button type="submit">Register</button>
         </template>
-      </modal>
+      </modal-base>
     </form>
   </Teleport>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import Modal from './common/Modal.vue';
+import ModalBase from '../common/ModalBase.vue';
+import { useMainStore } from '@/stores/main';
 
-const bark = ref('');
-const emit = defineEmits(['close']);
-const props = defineProps({
-  showModal: Boolean,
-});
+const content = ref('');
+
+const store = useMainStore();
 
 function registerBark() {
-  emit('close');
-  console.log(bark.value);
+  store.toggleBarkCompose();
+  console.log(content.value);
 }
 </script>
