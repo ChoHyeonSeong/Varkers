@@ -27,6 +27,10 @@ const store = useMainStore();
 
 function registerVark() {
   store.toggleVarkCompose();
-  console.log(content.value);
+  initVark();
+}
+
+function initVark(){
+  content.value='';
 }
 </script>
