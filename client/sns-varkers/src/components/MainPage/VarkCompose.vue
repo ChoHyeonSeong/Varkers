@@ -30,7 +30,7 @@ function registerVark() {
   initVark();
 }
 
-function initVark(){
-  content.value='';
+function initVark() {
+  content.value = '';
 }
 </script>

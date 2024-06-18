@@ -6,6 +6,7 @@
 </template>
 
 <script setup>
-import VarkRoad from './VarkRoad.vue';</script>
+import VarkRoad from './VarkRoad.vue';
+</script>
 
 <style scoped></style>

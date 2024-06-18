@@ -10,7 +10,6 @@
 import { useMainStore } from '@/stores/main';
 import VarkCompose from './VarkCompose.vue';
 const store = useMainStore();
-
 </script>
 
 <style scoped></style>

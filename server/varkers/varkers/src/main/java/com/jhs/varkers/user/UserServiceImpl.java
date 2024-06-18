@@ -1,37 +1,24 @@
 package com.jhs.varkers.user;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-    private final UserRepository repo;
+    private final UserDAO dao;
+    private final ModelMapper mapper;
 
     @Override
-    public boolean create(UserDTO dto) {
-        return repo.insert(dto);
-    }
-
-    @Override
-    public boolean update(UserDTO dto) {
-        return repo.update(dto);
-    }
-
-    @Override
-    public boolean delete(long id) {
-        return repo.delete(id);
+    public void insert(UserDTO dto) {
+        dao.insert(mapper.map(dto, UserEntity.class));
     }
 
     @Override
     public UserDTO read(long id) {
-        return repo.select(id);
-    }
-
-    @Override
-    public List<UserDTO> readAll() {
-        return repo.selectAll();
+        return mapper.map(dao.read(id), UserDTO.class);
     }
 }
