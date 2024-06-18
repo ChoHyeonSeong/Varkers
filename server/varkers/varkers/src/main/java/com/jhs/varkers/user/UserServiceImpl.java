@@ -13,12 +13,13 @@ public class UserServiceImpl implements UserService{
     private final ModelMapper mapper;
 
     @Override
-    public void insert(UserDTO dto) {
-        dao.insert(mapper.map(dto, UserEntity.class));
+    public void insertUser(UserDTO dto) {
+        dao.insertUser(mapper.map(dto, UserEntity.class));
     }
 
     @Override
-    public UserDTO read(long id) {
-        return mapper.map(dao.read(id), UserDTO.class);
+    public UserDTO getUser(String email, String password) {
+        UserEntity user = dao.getUserByEmail(email);
+        return user != null && user.getPassword().equals(password)? mapper.map(user, UserDTO.class):null;
     }
 }
