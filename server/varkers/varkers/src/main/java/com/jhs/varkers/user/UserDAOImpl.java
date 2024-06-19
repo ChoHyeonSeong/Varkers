@@ -15,6 +15,6 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public UserEntity getUserByEmail(String email) {
-        return repo.findUserByEmail(email);
+        return repo.findFirstByEmail(email);
     }
 }
