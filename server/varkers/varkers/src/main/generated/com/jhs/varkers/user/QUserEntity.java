@@ -21,13 +21,13 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public final DateTimePath<java.util.Date> birth = createDateTime("birth", java.util.Date.class);
 
-    public final DateTimePath<java.util.Date> created_at = createDateTime("created_at", java.util.Date.class);
+    public final DateTimePath<java.util.Date> createdAt = createDateTime("createdAt", java.util.Date.class);
 
     public final StringPath email = createString("email");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final NumberPath<Integer> max_account = createNumber("max_account", Integer.class);
+    public final NumberPath<Integer> maxAccount = createNumber("maxAccount", Integer.class);
 
     public final StringPath password = createString("password");
 

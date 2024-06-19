@@ -15,6 +15,6 @@ public class UserDTO {
     private String password;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
-    private int max_account;
-    private Date created_at;
+    private int maxAccount;
+    private Date createdAt;
 }

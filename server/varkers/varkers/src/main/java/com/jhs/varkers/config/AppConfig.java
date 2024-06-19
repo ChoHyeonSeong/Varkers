@@ -13,7 +13,13 @@ public class AppConfig {
     private final EntityManager em;
     @Bean
     public ModelMapper modelMapper(){
-        return new ModelMapper();
+
+        ModelMapper mapper = new ModelMapper();
+
+        mapper.getConfiguration()
+                .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE)
+                .setFieldMatchingEnabled(true);
+        return mapper;
     }
 
     @Bean

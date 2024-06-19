@@ -16,28 +16,27 @@
 </template>
 
 <script setup>
+import axios from 'axios';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
 const email = ref('');
 const password = ref('');
 const birth = ref('');
+const router = useRouter();
 
 async function submitForm() {
   try {
     const userData = {
-      email: this.email.value,
-      password: this.password.value,
-      birth: this.birth.value,
+      email: email.value,
+      password: password.value,
+      birth: birth.value,
     };
-    axios
-      .post('http://localhost:7002/user/signup', userData)
-      .then((res) => {
-        console.log('성공' + res);
-      })
-      .catch((res) => {
-        console.error('실패' + res);
-      });
-    router.push('/main');
+    const { data } = await axios.post('http://localhost:7002/user/signup', userData);
+    console.log(data);
+    router.push('/');
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error);
   }
 }
 </script>

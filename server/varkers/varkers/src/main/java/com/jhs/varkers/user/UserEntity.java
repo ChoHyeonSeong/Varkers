@@ -1,12 +1,7 @@
 package com.jhs.varkers.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
@@ -18,12 +13,12 @@ import java.util.Date;
 @Table(name ="user")
 public class UserEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     private String email;
     private String password;
     private Date birth;
-    private int max_account;
+    private int maxAccount;
     @CreationTimestamp
-    private Date created_at;
+    private Date createdAt;
 }

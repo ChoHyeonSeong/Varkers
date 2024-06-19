@@ -9,12 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
+    private final static int DEFAULT_MAX_ACCOUNT = 3;
     private final UserDAO dao;
     private final ModelMapper mapper;
 
     @Override
     public void insertUser(UserDTO dto) {
-        dao.insertUser(mapper.map(dto, UserEntity.class));
+        dto.setMaxAccount(DEFAULT_MAX_ACCOUNT);
+        UserEntity entity = mapper.map(dto, UserEntity.class);
+        System.out.println(entity);
+        dao.insertUser(entity);
     }
 
     @Override
