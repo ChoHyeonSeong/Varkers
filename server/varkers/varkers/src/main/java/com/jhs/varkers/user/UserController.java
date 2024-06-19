@@ -1,29 +1,24 @@
 package com.jhs.varkers.user;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@NoArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
+    private final UserService userService;
 
     @PostMapping("/signin")
-    public String signIn() {
-//        String email, String password
-        String result = "";
-        System.out.println("signin 작동");
-        return result;
+    public String signIn(@RequestBody UserDTO dto) {
+        UserDTO user = userService.getUser(dto.getEmail(), dto.getPassword());
+        return user!=null?"exist user":"null user";
     }
 
     @PostMapping("/signup")
-    public String signUp() {
-        //UserDTO dto
-        String result = "";
-        System.out.println("signup 작동");
-        return result;
+    public String signUp(UserDTO user) {
+        //userService.insertUser(user);
+        System.out.println(user);
+        return "";
     }
 }

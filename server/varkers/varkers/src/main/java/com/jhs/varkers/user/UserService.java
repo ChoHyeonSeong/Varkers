@@ -3,6 +3,6 @@ package com.jhs.varkers.user;
 import java.util.List;
 
 public interface UserService {
-    void insert(UserDTO dto);
-    UserDTO read(long id);
+    void insertUser(UserDTO dto);
+    UserDTO getUser(String email, String password);
 }
