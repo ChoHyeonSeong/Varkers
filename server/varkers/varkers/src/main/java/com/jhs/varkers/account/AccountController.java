@@ -10,22 +10,25 @@ public class AccountController {
     private final AccountService accountService;
 
     @PostMapping
-    public String createAccount(){
-        return "";
+    public String createAccount(@RequestBody AccountDTO account){
+        accountService.createAccount(account);
+        return "OK";
     }
     @GetMapping
-    public String readAccount(){
-        return "";
+    public AccountDTO readAccount(@RequestParam Long accountId){
+        return accountService.readAccount(accountId);
     }
 
     @PutMapping
-    public String updateAccount(){
-        return "";
+    public String updateAccount(@RequestBody AccountDTO account){
+        accountService.updateAccount(account);
+        return "OK";
     }
 
     @DeleteMapping
-    public String deleteAccount(){
-        return "";
+    public String deleteAccount(@RequestParam Long accountId){
+        accountService.deleteAccount(accountId);
+        return "OK";
     }
 
 }

@@ -1,10 +1,13 @@
 package com.jhs.varkers.user;
 
+import com.jhs.varkers.account.AccountEntity;
 import jakarta.persistence.*;
+import jdk.dynalink.linker.LinkerServices;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -14,11 +17,18 @@ import java.util.Date;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private long id;
+    private Long id;
     private String email;
     private String password;
+    private int maxAccountCount;
+    private Long currentAccountId;
     private Date birth;
-    private int maxAccount;
     @CreationTimestamp
     private Date createdAt;
+    @OneToMany(mappedBy = "user")
+    private List<AccountEntity> accounts;
+
+    public void updateCurrentAccountId(Long currentAccountId) {
+        this.currentAccountId = currentAccountId;
+    }
 }

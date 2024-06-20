@@ -10,14 +10,14 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signin")
-    public UserDTO signIn(@RequestBody UserDTO dto) {
-        return userService.getUser(dto.getEmail(), dto.getPassword());
+    public UserDTO signInUser(@RequestBody UserDTO dto) {
+        return userService.certifyUser(dto.getEmail(), dto.getPassword());
     }
 
     @PostMapping("/signup")
-    public String signUp(@RequestBody UserDTO user) {
+    public String signUpUser(@RequestBody UserDTO user) {
         System.out.println(user);
-        userService.insertUser(user);
+        userService.createUser(user);
         return "OK";
     }
 }

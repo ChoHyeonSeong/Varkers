@@ -9,12 +9,12 @@ public class UserDAOImpl implements UserDAO{
     private final UserRepository repo;
 
     @Override
-    public void insertUser(UserEntity user) {
+    public void createUser(UserEntity user) {
         repo.save(user);
     }
 
     @Override
-    public UserEntity getUserByEmail(String email) {
+    public UserEntity readUserByEmail(String email) {
         return repo.findFirstByEmail(email);
     }
 }

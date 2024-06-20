@@ -10,11 +10,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class UserDTO {
-    private long id;
+    private Long id;
     private String email;
     private String password;
+    private int maxAccountCount;
+    private Long currentAccountId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
-    private int maxAccount;
     private Date createdAt;
 }
