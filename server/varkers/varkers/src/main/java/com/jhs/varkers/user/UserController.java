@@ -10,15 +10,14 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signin")
-    public String signIn(@RequestBody UserDTO dto) {
-        UserDTO user = userService.getUser(dto.getEmail(), dto.getPassword());
-        return user!=null?"exist user":"null user";
+    public UserDTO signInUser(@RequestBody UserDTO dto) {
+        return userService.certifyUser(dto.getEmail(), dto.getPassword());
     }
 
     @PostMapping("/signup")
-    public String signUp(UserDTO user) {
-        //userService.insertUser(user);
+    public String signUpUser(@RequestBody UserDTO user) {
         System.out.println(user);
-        return "";
+        userService.createUser(user);
+        return "OK";
     }
 }
