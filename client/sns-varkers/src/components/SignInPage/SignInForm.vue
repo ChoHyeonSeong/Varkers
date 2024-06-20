@@ -27,15 +27,9 @@ async function submitForm() {
       email: email.value,
       password: password.value,
     };
-  axios
-    .post('http://localhost:7002/user/signin',userData)
-    .then((res) => {
-      console.log("성공"+res);
-    })
-    .catch((res) => {
-      console.error("실패"+res);
-    });
-  router.push('/main');
+    const { data } = await axios.post('http://localhost:7002/user/signin', userData);
+    console.log(data.id);
+    router.push('/main');
   } catch (error) {
     console.log(error);
   }

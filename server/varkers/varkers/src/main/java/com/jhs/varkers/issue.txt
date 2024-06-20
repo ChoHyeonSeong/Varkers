@@ -1,0 +1,8 @@
+1. dto로 매개변수 받아올 때, null값 들어있던 문제
+    - @RequestBody 어노테이션 붙여서 해결
+2. modelMapper로 dto -> entity 변환할 때 null값 들어가는 문제
+    - entity에 있던 @Getters 어노테이션을 @Data로 바꿔서 해결
+    ? @Data를 붙이는 경우에는 Setter도 들어가는데, 불변성 보장은 어떻게 해결해야 할까
+        - https://www.inflearn.com/questions/744366/entity%EC%97%90-setter-%EC%82%AC%EC%9A%A9-%EC%95%88%ED%95%A0%EC%8B%9C-modelmapper-%EC%84%A4%EC%A0%95
+        - modelMapper의 설정을 바꾸는 것으로 해결
+3. service에서 다른 service를 호출해야 하는 문제
