@@ -13,6 +13,7 @@
 </template>
 
 <script setup>
+import { useMainStore } from '@/stores/main';
 import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -20,6 +21,7 @@ import { useRouter } from 'vue-router';
 const email = ref('');
 const password = ref('');
 const router = useRouter();
+const mainStore = useMainStore();
 
 async function submitForm() {
   try {
@@ -29,6 +31,7 @@ async function submitForm() {
     };
     const { data } = await axios.post('http://localhost:7002/user/signin', userData);
     console.log(data.id);
+    mainStore.setCurrentAccountId(data.currentAccountId);
     router.push('/main');
   } catch (error) {
     console.log(error);

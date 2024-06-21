@@ -40,6 +40,8 @@ public class QAccountEntity extends EntityPathBase<AccountEntity> {
 
     public final com.jhs.varkers.user.QUserEntity user;
 
+    public final ListPath<com.jhs.varkers.vark.VarkEntity, com.jhs.varkers.vark.QVarkEntity> varks = this.<com.jhs.varkers.vark.VarkEntity, com.jhs.varkers.vark.QVarkEntity>createList("varks", com.jhs.varkers.vark.VarkEntity.class, com.jhs.varkers.vark.QVarkEntity.class, PathInits.DIRECT2);
+
     public QAccountEntity(String variable) {
         this(AccountEntity.class, forVariable(variable), INITS);
     }
