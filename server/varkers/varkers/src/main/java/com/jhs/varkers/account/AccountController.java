@@ -14,9 +14,9 @@ public class AccountController {
         accountService.createAccount(account);
         return "OK";
     }
-    @GetMapping
-    public AccountDTO readAccount(@RequestParam Long accountId){
-        return accountService.readAccount(accountId);
+    @GetMapping("/{id}")
+    public AccountDTO readAccount(@PathVariable Long id){
+        return accountService.readAccount(id);
     }
 
     @PutMapping
@@ -25,9 +25,9 @@ public class AccountController {
         return "OK";
     }
 
-    @DeleteMapping
-    public String deleteAccount(@RequestParam Long accountId){
-        accountService.deleteAccount(accountId);
+    @DeleteMapping("/{id}")
+    public String deleteAccount(@PathVariable Long id){
+        accountService.deleteAccount(id);
         return "OK";
     }
 
