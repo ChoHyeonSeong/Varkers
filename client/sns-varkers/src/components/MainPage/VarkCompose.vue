@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <form @submit.prevent="registerVark">
-      <modal-base :show="store.showVarkCompose" @close="store.toggleVarkCompose">
+      <modal-base :show="mainStore.showVarkCompose" @close="mainStore.toggleVarkCompose">
         <template #header>
           <h3>Vark Register</h3>
         </template>
@@ -20,13 +20,24 @@
 import { ref } from 'vue';
 import ModalBase from '../common/ModalBase.vue';
 import { useMainStore } from '@/stores/main';
+import axios from 'axios';
 
 const content = ref('');
 
-const store = useMainStore();
+const mainStore = useMainStore();
 
 function registerVark() {
-  store.toggleVarkCompose();
+  mainStore.toggleVarkCompose();
+  const varkData = {
+    accountId: mainStore.currentAccountId,
+    content: content.value,
+  };
+  try {
+    const { data } = axios.post('http://localhost:7002/vark', varkData);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
   initVark();
 }
 
