@@ -16,9 +16,9 @@
 </template>
 
 <script setup>
-import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { signUpUser } from "@/api/auth";
 
 const email = ref('');
 const password = ref('');
@@ -32,7 +32,7 @@ async function submitForm() {
       password: password.value,
       birth: birth.value,
     };
-    const { data } = await axios.post('http://localhost:7002/user/signup', userData);
+    const { data } = await signUpUser(userData);
     console.log(data);
     router.push('/');
   } catch (error) {
