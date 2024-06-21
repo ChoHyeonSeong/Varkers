@@ -11,15 +11,15 @@
 </template>
 
 <script setup>
-import { useMainStore } from '@/stores/main';
-import axios from 'axios';
 import { ref } from 'vue';
+import { useMainStore } from '@/stores/main';
+import { readVarkOfAccount } from "@/api/vark";
 
 const mainStore = useMainStore();
 const varkData = ref('');
 
 async function fetchVarkRoad() {
-  const { data } = await axios.get('http://localhost:7002/vark/account/' + mainStore.currentAccountId);
+  const { data } = await readVarkOfAccount(mainStore.currentAccountId);
   console.log(data[0].content);
   varkData.value = data;
 }
