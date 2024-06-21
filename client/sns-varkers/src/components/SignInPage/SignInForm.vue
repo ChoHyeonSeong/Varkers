@@ -13,10 +13,10 @@
 </template>
 
 <script setup>
-import { useMainStore } from '@/stores/main';
-import axios from 'axios';
 import { ref } from 'vue';
+import { useMainStore } from '@/stores/main';
 import { useRouter } from 'vue-router';
+import { signInUser } from "@/api/auth";
 
 const email = ref('');
 const password = ref('');
@@ -29,7 +29,7 @@ async function submitForm() {
       email: email.value,
       password: password.value,
     };
-    const { data } = await axios.post('http://localhost:7002/user/signin', userData);
+    const { data } = await signInUser(userData);
     console.log(data.id);
     mainStore.setCurrentAccountId(data.currentAccountId);
     router.push('/main');
