@@ -32,6 +32,10 @@ async function submitForm() {
     const { data } = await signInUser(userData);
     console.log(data.id);
     mainStore.setCurrentAccountId(data.currentAccountId);
+    const eventSource = new EventSource(`http://localhost:7002/subscribe/${data.currentAccountId}`);
+    eventSource.addEventListener('sse',async (e)=>{
+      await console.log('create sse');
+    });
     router.push('/main');
   } catch (error) {
     console.log(error);

@@ -17,13 +17,14 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public SseEmitter subscribe(Long accountId) {
         SseEmitter emitter = createEmitter(accountId);
-        return null;
+        sendToClient(accountId, "EventStream Created. [accountId="+ accountId + "]");
+        return emitter;
     }
 
     @Override
     public void sendToClient(Long accountId, Object data) {
         SseEmitter emitter = emitterRepo.findById(accountId);
-        if (emitter == null) {
+        if (emitter != null) {
             try {
                 emitter.send(SseEmitter.event()
                         .id(String.valueOf(accountId))

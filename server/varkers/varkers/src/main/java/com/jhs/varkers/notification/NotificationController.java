@@ -17,3 +17,4 @@ public class NotificationController {
         return notificationService.subscribe(accountId);
     }
 }
+

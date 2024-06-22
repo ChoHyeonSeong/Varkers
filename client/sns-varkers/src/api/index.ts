@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-function createInstance() {
+function createInstance(url:string) {
     return axios.create({
-      baseURL: import.meta.env.VUE_APP_API_URL,
+      baseURL: `${import.meta.env.VITE_APP_API_URL}${url}`,
   });
 }
 
 function createInstanceWithAuth(url:string) {
   const instance = axios.create({
-    baseURL: `${import.meta.env.VUE_APP_API_URL}${url}`,
+    baseURL: `${import.meta.env.VITE_APP_API_URL}${url}`,
   });
   return instance;
   // return setInterceptors(instance);
 }
 
-export const instance = createInstance();
+export const user = createInstance('user');
 export const vark = createInstanceWithAuth('vark');
