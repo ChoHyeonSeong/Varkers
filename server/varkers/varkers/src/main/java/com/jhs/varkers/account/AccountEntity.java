@@ -1,5 +1,6 @@
 package com.jhs.varkers.account;
 
+import com.jhs.varkers.listening.ListeningEntity;
 import com.jhs.varkers.user.UserEntity;
 import com.jhs.varkers.vark.VarkEntity;
 import jakarta.persistence.*;
@@ -37,6 +38,10 @@ public class AccountEntity {
 
     @OneToMany(mappedBy = "account")
     private List<VarkEntity> varks;
+
+
+    @OneToMany(mappedBy = "account")
+    private List<ListeningEntity> listenings;
 
     public void updateAccount(String name, String nickname,String profileImage, String description) {
         this.name = name;
