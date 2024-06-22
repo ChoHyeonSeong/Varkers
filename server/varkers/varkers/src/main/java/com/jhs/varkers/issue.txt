@@ -6,3 +6,6 @@
         - https://www.inflearn.com/questions/744366/entity%EC%97%90-setter-%EC%82%AC%EC%9A%A9-%EC%95%88%ED%95%A0%EC%8B%9C-modelmapper-%EC%84%A4%EC%A0%95
         - modelMapper의 설정을 바꾸는 것으로 해결
 3. service에서 다른 service를 호출해야 하는 문제
+    - 다른 service를 autowired 해와서 호출
+4. varkroad 실시간 업데이트 어떻게 구현?
+    - SSE 사용
