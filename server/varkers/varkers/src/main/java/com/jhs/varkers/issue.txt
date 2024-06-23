@@ -9,3 +9,4 @@
     - 다른 service를 autowired 해와서 호출
 4. varkroad 실시간 업데이트 어떻게 구현?
     - SSE 사용
+5. varkroad 구성할때 queryDSL 써서 in 조건으로 listening List을 넣어야 하는데,

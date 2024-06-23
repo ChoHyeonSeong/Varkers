@@ -1,5 +1,8 @@
 package com.jhs.varkers.vark;
 
+import com.jhs.varkers.account.AccountEntity;
+import com.jhs.varkers.account.AccountService;
+import com.jhs.varkers.listening.ListeningService;
 import com.jhs.varkers.notification.NotificationService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,8 @@ import java.util.stream.Collectors;
 public class VarkServiceImpl implements VarkService {
     private final VarkDAO dao;
     private final NotificationService notificationService;
+    private final ListeningService listeningService;
+    private final AccountService accountService;
     private final ModelMapper mapper;
 
     private static final String SEND_CREATE_TYPE = "create";
@@ -42,5 +47,14 @@ public class VarkServiceImpl implements VarkService {
     @Override
     public void deleteVark(Long id) {
         dao.deleteVark(id);
+    }
+
+    @Override
+    public List<VarkDTO> readVarkRoad(Long accountId) {
+        List<AccountEntity> listeningList = listeningService.readByAccountId(accountId)
+                .stream()
+                .map(l->mapper.map(accountService.readAccount(l.getListeningId()),AccountEntity.class) )
+                .toList();
+        return null;
     }
 }

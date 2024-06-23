@@ -17,14 +17,14 @@ public class VarkController {
         return "OK";
     }
 
-    @GetMapping("/{id}")
-    public VarkDTO readVark(@PathVariable Long id)
+    @GetMapping("/{varkId}")
+    public VarkDTO readVark(@PathVariable Long varkId)
     {
-        return varkService.readVark(id);
+        return varkService.readVark(varkId);
     }
 
-    @GetMapping("/account/{id}")
-    public List<VarkDTO> readVarkOfAccount(@PathVariable(name = "id") Long accountId)
+    @GetMapping("/account/{accountId}")
+    public List<VarkDTO> readVarkOfAccount(@PathVariable Long accountId)
     {
         return varkService.readVarkOfAccount(accountId);
     }
@@ -34,5 +34,10 @@ public class VarkController {
     {
         varkService.deleteVark(id);
         return "OK";
+    }
+
+    @GetMapping("/road/{accountId}")
+    public List<VarkDTO> readVarkRoad(@PathVariable Long accountId){
+        return varkService.readVarkRoad(accountId);
     }
 }
