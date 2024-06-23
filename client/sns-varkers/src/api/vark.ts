@@ -5,7 +5,7 @@ function readVarkOfAccount(accountId:bigint){
 }
 
 function createVark(varkData:string){
-    return vark.post('/',varkData);
+    return vark.post('',varkData);
 }
 
 function deleteVark(varkId:bigint){

@@ -16,7 +16,7 @@
 import { ref } from 'vue';
 import { useMainStore } from '@/stores/main';
 import { useRouter } from 'vue-router';
-import { signInUser } from "@/api/auth";
+import { signInUser } from '@/api/auth';
 
 const email = ref('');
 const password = ref('');
@@ -30,12 +30,7 @@ async function submitForm() {
       password: password.value,
     };
     const { data } = await signInUser(userData);
-    console.log(data.id);
-    mainStore.setCurrentAccountId(data.currentAccountId);
-    const eventSource = new EventSource(`http://localhost:7002/subscribe/${data.currentAccountId}`);
-    eventSource.addEventListener('sse',async (e)=>{
-      await console.log('create sse');
-    });
+    mainStore.initMainStore(data.currentAccountId);
     router.push('/main');
   } catch (error) {
     console.log(error);

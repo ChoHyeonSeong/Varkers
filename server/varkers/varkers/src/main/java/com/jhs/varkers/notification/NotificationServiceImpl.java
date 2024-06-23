@@ -1,5 +1,6 @@
 package com.jhs.varkers.notification;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -9,6 +10,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class NotificationServiceImpl implements NotificationService {
 
     private static final Long DEFAULT_TIMEOUT = 36000000L;
@@ -17,18 +19,18 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public SseEmitter subscribe(Long accountId) {
         SseEmitter emitter = createEmitter(accountId);
-        sendToClient(accountId, "EventStream Created. [accountId="+ accountId + "]");
+        sendToClient(accountId, "EventStream Created. [accountId="+ accountId + "]","subscribe");
         return emitter;
     }
 
     @Override
-    public void sendToClient(Long accountId, Object data) {
+    public void sendToClient(Long accountId, Object data, String type) {
         SseEmitter emitter = emitterRepo.findById(accountId);
         if (emitter != null) {
             try {
                 emitter.send(SseEmitter.event()
                         .id(String.valueOf(accountId))
-                        .name("sse")
+                        .name(type)
                         .data(data)
                 );
 

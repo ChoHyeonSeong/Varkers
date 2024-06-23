@@ -9,7 +9,7 @@ export const useMainStore = defineStore('main', {
     toggleVarkCompose() {
       this.showVarkCompose = !this.showVarkCompose;
     },
-    setCurrentAccountId(currentAccountId:bigint) {
+    initMainStore(currentAccountId:bigint) {
       this.currentAccountId = currentAccountId;
     },
   },

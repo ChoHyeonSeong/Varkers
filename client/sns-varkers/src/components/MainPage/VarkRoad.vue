@@ -1,9 +1,8 @@
 <template>
   <div>
     <h3>바크 로드</h3>
-    <button type="button" @click="fetchVarkRoad">새로고침</button>
     <ul>
-      <li v-for="vark in varkData" :key="vark.id">
+      <li v-for="vark in varkList" :key="vark.id">
         <p>{{ vark.content }}</p>
       </li>
     </ul>
@@ -12,17 +11,16 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useMainStore } from '@/stores/main';
-import { readVarkOfAccount } from "@/api/vark";
+const varkList = ref([]);
+const props = defineProps({
+  accountId: Number,
+});
 
-const mainStore = useMainStore();
-const varkData = ref('');
+const eventSourcee = new EventSource(`http://localhost:7002/subscribe/${props.accountId}`);
+eventSourcee.addEventListener('create', (e) => {
+  varkList.value.unshift(JSON.parse(e.data));
+});
 
-async function fetchVarkRoad() {
-  const { data } = await readVarkOfAccount(mainStore.currentAccountId);
-  console.log(data[0].content);
-  varkData.value = data;
-}
 </script>
 
 <style scoped></style>

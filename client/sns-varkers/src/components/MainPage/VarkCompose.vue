@@ -20,20 +20,20 @@
 import { ref } from 'vue';
 import ModalBase from '../common/ModalBase.vue';
 import { useMainStore } from '@/stores/main';
-import axios from 'axios';
+import { createVark } from '@/api/vark';
 
 const content = ref('');
 
 const mainStore = useMainStore();
 
-function registerVark() {
-  mainStore.toggleVarkCompose();
-  const varkData = {
-    accountId: mainStore.currentAccountId,
-    content: content.value,
-  };
+async function registerVark() {
   try {
-    const { data } = axios.post('http://localhost:7002/vark', varkData);
+    mainStore.toggleVarkCompose();
+    const varkData = {
+      accountId: mainStore.currentAccountId,
+      content: content.value,
+    };
+    const { data } = await createVark(varkData);
     console.log(data);
   } catch (error) {
     console.log(error);
