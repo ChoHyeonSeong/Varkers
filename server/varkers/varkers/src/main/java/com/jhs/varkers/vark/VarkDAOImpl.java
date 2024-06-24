@@ -1,5 +1,6 @@
 package com.jhs.varkers.vark;
 
+import com.jhs.varkers.account.AccountEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +29,10 @@ public class VarkDAOImpl implements VarkDAO {
     @Override
     public void deleteVark(Long id) {
         repo.deleteById(id);
+    }
+
+    @Override
+    public List<VarkEntity> readVarkRoad(List<Long> listeningList) {
+        return repo.findByListening(listeningList);
     }
 }

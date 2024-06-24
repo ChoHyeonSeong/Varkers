@@ -7,4 +7,5 @@ public interface VarkService {
     VarkDTO readVark(Long id);
     void deleteVark(Long id);
     List<VarkDTO> readVarkOfAccount(Long accountId);
+    List<VarkDTO> readVarkRoad(Long accountId);
 }
