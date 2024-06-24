@@ -9,5 +9,5 @@ public interface VarkDAO {
     VarkEntity readVark(Long id);
     void deleteVark(Long id);
     List<VarkEntity> readVarkOfAccount(Long accountId);
-    List<VarkEntity> readVarkRoad(List<AccountEntity> listeningList);
+    List<VarkEntity> readVarkRoad(List<Long> listeningList);
 }

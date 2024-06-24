@@ -29,10 +29,10 @@ public class VarkController {
         return varkService.readVarkOfAccount(accountId);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteVark(@PathVariable Long id)
+    @DeleteMapping("/{varkId}")
+    public String deleteVark(@PathVariable Long varkId)
     {
-        varkService.deleteVark(id);
+        varkService.deleteVark(varkId);
         return "OK";
     }
 

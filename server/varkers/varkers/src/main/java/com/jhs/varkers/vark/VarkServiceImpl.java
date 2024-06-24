@@ -1,7 +1,10 @@
 package com.jhs.varkers.vark;
 
+import com.jhs.varkers.account.AccountDAO;
 import com.jhs.varkers.account.AccountEntity;
 import com.jhs.varkers.account.AccountService;
+import com.jhs.varkers.listening.ListeningDTO;
+import com.jhs.varkers.listening.ListeningEntity;
 import com.jhs.varkers.listening.ListeningService;
 import com.jhs.varkers.notification.NotificationService;
 import jakarta.transaction.Transactional;
@@ -19,7 +22,6 @@ public class VarkServiceImpl implements VarkService {
     private final VarkDAO dao;
     private final NotificationService notificationService;
     private final ListeningService listeningService;
-    private final AccountService accountService;
     private final ModelMapper mapper;
 
     private static final String SEND_CREATE_TYPE = "create";
@@ -28,7 +30,15 @@ public class VarkServiceImpl implements VarkService {
     public void createVark(VarkDTO dto) {
         VarkEntity entity = mapper.map(dto,VarkEntity.class);
         dao.createVark(entity);
-        notificationService.sendToClient(dto.getAccountId(),mapper.map(entity,VarkDTO.class),SEND_CREATE_TYPE);
+        VarkDTO sendDTO = mapper.map(entity,VarkDTO.class);
+        List<Long> listenerList = listeningService.readByListeningId(sendDTO.getAccountId())
+                .stream()
+                .map(ListeningDTO::getAccountId)
+                .collect(Collectors.toList());
+        listenerList.add(sendDTO.getAccountId());
+        listenerList.forEach(l->{
+            notificationService.sendToClient(l,sendDTO,SEND_CREATE_TYPE);
+        });
     }
 
     @Override
@@ -51,10 +61,15 @@ public class VarkServiceImpl implements VarkService {
 
     @Override
     public List<VarkDTO> readVarkRoad(Long accountId) {
-        List<AccountEntity> listeningList = listeningService.readByAccountId(accountId)
+        List<Long> listeningList = listeningService.readByAccountId(accountId)
                 .stream()
-                .map(l->mapper.map(accountService.readAccount(l.getListeningId()),AccountEntity.class) )
-                .toList();
-        return null;
+                .map(ListeningDTO::getListeningId)
+                .collect(Collectors.toList());
+        listeningList.add(accountId);
+
+        return dao.readVarkRoad(listeningList)
+                .stream()
+                .map(e->mapper.map(e,VarkDTO.class))
+                .collect(Collectors.toList());
     }
 }

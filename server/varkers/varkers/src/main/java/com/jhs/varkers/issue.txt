@@ -9,4 +9,10 @@
     - 다른 service를 autowired 해와서 호출
 4. varkroad 실시간 업데이트 어떻게 구현?
     - SSE 사용
-5. varkroad 구성할때 queryDSL 써서 in 조건으로 listening List을 넣어야 하는데,
+5. pathvariable 생략이 되지 않던 문제
+    - java complie에서 -parameters 추가
+6. 최신의 vark를 어떻게 가져올건지 문제
+    - order by로 역순 정렬해서 50개만 받아옴
+    ? row가 많아지면 속도가 느려지지 않을까?
+7. 연관관계에 있는 컬럼을 in으로 어떻게 가져오지?
+    - join해서 테이블 만들고, in에 account id을 넣는다

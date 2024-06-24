@@ -11,6 +11,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { readVarkRoad } from '@/api/vark';
 const varkList = ref([]);
 
 const props = defineProps({
@@ -21,7 +22,10 @@ const eventSourcee = new EventSource(`http://localhost:7002/subscribe/${props.ac
 eventSourcee.addEventListener('create', (e) => {
   varkList.value.unshift(JSON.parse(e.data));
 });
-
+eventSourcee.onopen = async () => {
+  const { data } = await readVarkRoad(props.accountId);
+  varkList.value = data;
+};
 </script>
 
 <style scoped></style>

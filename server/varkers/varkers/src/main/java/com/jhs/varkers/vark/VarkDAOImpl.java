@@ -32,7 +32,7 @@ public class VarkDAOImpl implements VarkDAO {
     }
 
     @Override
-    public List<VarkEntity> readVarkRoad(List<AccountEntity> listeningList) {
-        return List.of();
+    public List<VarkEntity> readVarkRoad(List<Long> listeningList) {
+        return repo.findByListening(listeningList);
     }
 }
