@@ -1,11 +1,11 @@
-import { instance } from "./index";
+import { user } from "./index";
 
 function signInUser(userData:string){
-    return instance.post('signin',userData);
+    return user.post('signin',userData);
 }
 
 function signUpUser(userData:string){
-    return instance.post('signup',userData);
+    return user.post('signup',userData);
 }
 
 export {signInUser,signUpUser};

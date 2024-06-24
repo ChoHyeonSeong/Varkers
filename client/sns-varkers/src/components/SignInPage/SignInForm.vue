@@ -16,7 +16,7 @@
 import { ref } from 'vue';
 import { useMainStore } from '@/stores/main';
 import { useRouter } from 'vue-router';
-import { signInUser } from "@/api/auth";
+import { signInUser } from '@/api/auth';
 
 const email = ref('');
 const password = ref('');
@@ -30,8 +30,7 @@ async function submitForm() {
       password: password.value,
     };
     const { data } = await signInUser(userData);
-    console.log(data.id);
-    mainStore.setCurrentAccountId(data.currentAccountId);
+    mainStore.initMainStore(data.currentAccountId);
     router.push('/main');
   } catch (error) {
     console.log(error);

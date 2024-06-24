@@ -30,6 +30,8 @@ public class QAccountEntity extends EntityPathBase<AccountEntity> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final ListPath<com.jhs.varkers.listening.ListeningEntity, com.jhs.varkers.listening.QListeningEntity> listenings = this.<com.jhs.varkers.listening.ListeningEntity, com.jhs.varkers.listening.QListeningEntity>createList("listenings", com.jhs.varkers.listening.ListeningEntity.class, com.jhs.varkers.listening.QListeningEntity.class, PathInits.DIRECT2);
+
     public final StringPath name = createString("name");
 
     public final StringPath nickname = createString("nickname");

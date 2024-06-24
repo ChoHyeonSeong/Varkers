@@ -14,9 +14,9 @@ public class AccountController {
         accountService.createAccount(account);
         return "OK";
     }
-    @GetMapping("/{id}")
-    public AccountDTO readAccount(@PathVariable Long id){
-        return accountService.readAccount(id);
+    @GetMapping("/{accountId}")
+    public AccountDTO readAccount(@PathVariable Long accountId){
+        return accountService.readAccount(accountId);
     }
 
     @PutMapping
