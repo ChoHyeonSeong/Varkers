@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h3>바크 로드</h3>
     <ul>
       <li v-for="vark in varkList" :key="vark.id">
-        <p>{{ vark.content }}</p>
+        <div>{{ vark.content }}</div>
       </li>
     </ul>
   </div>
@@ -28,4 +27,8 @@ eventSourcee.onopen = async () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+li{
+  list-style: none;
+}
+</style>

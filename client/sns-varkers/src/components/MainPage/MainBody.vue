@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <h2>메인 바디</h2>
-    <vark-road :accountId="mainStore.currentAccountId"/>
+  <div class="container">
+    <vark-road :accountId="mainStore.currentAccountId" />
   </div>
 </template>
 
@@ -12,4 +11,11 @@ import VarkRoad from './VarkRoad.vue';
 const mainStore = useMainStore();
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  border: 1px solid rgb(209, 255, 216);
+  border-bottom: none;
+  border-top: none;
+  height: 100%;
+}
+</style>
