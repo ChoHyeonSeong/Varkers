@@ -26,7 +26,7 @@ import RightBody from '@/components/MainPage/RightBody.vue';
 
 <style scoped>
 .page {
-  text-align: center;
+  /* text-align: center; */
   display: flex;
   justify-content: center;
   overflow-x: hidden;

@@ -16,3 +16,5 @@
     ? row가 많아지면 속도가 느려지지 않을까?
 7. 연관관계에 있는 컬럼을 in으로 어떻게 가져오지?
     - join해서 테이블 만들고, in에 account id을 넣는다
+8. vark를 불러오고 account를 한번 더 불러와야하는데, Unhandled error during execution(속성에 접근할수없음) 문제발생
+    - 아마도 async문제
