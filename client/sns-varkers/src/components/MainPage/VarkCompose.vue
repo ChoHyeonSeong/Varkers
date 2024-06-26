@@ -3,7 +3,7 @@
     <form @submit.prevent="registerVark">
       <modal-base :show="mainStore.showVarkCompose" @close="mainStore.toggleVarkCompose">
         <template #header>
-          <h3>Vark Register</h3>
+          <button type="button" @click="cancelCompose">X</button>
         </template>
         <template #body>
           <input type="text" v-model="content" />
@@ -38,6 +38,11 @@ async function registerVark() {
   } catch (error) {
     console.log(error);
   }
+  initVark();
+}
+
+function cancelCompose(){
+  mainStore.toggleVarkCompose();
   initVark();
 }
 

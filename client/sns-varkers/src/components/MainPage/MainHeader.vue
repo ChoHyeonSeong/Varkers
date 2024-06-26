@@ -1,11 +1,14 @@
 <template>
   <div class="box-header">
     <div class="menu align-center">
-      <div id="selected-tab" class="tab align-center">
-        <span class="tab-text"> 로드 </span>
-        <div id="select-bar"></div>
+      <div class="tab align-center" @click="clickRoadTab">
+        <span :id="isRoad?'selected-tab':''" class="tab-text"> 로드 </span>
+        <div v-if="isRoad" id="select-bar"></div>
       </div>
-      <div class="tab align-center">반응</div>
+      <div class="tab align-center" @click="clickReactionTab">
+        <span :id="!isRoad?'selected-tab':''" class="tab-text">반응</span>
+        <div v-if="!isRoad" id="select-bar"></div>
+      </div>
     </div>
     <div class="btn-box align-center" @click="mainStore.toggleVarkCompose">
       <p>외치기</p>
@@ -17,7 +20,18 @@
 <script setup>
 import { useMainStore } from '@/stores/main';
 import VarkCompose from './VarkCompose.vue';
+import { ref } from 'vue';
 const mainStore = useMainStore();
+const isRoad = ref(true);
+
+function clickRoadTab(){
+  isRoad.value=true;
+}
+
+function clickReactionTab(){
+  isRoad.value=false;
+}
+
 </script>
 
 <style scoped>
@@ -46,14 +60,16 @@ const mainStore = useMainStore();
   justify-content: center;
   align-items: center;
 }
-.tab-text{
+.tab-text {
   display: flex;
-  align-items : center;
+  align-items: center;
   height: 50px;
+}
+.tab:hover {
+  background-color: rgb(209, 255, 216);
 }
 
 #selected-tab {
-  background-color: rgb(209, 255, 216);
   font-weight: bold;
 }
 

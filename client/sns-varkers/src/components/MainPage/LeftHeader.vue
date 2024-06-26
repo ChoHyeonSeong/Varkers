@@ -1,7 +1,7 @@
 <template>
   <div class="box-header">
-    <div class="left-box-block">
-      로고
+    <div class="left-box-block align-center">
+      <img id="logo" src="/varkers-bg.png"/>
     </div>
   </div>
 </template>
@@ -23,5 +23,16 @@
 
 .left-box-block{
   width: 300px;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+#logo{
+  width: 44px;
+  height: 44px;
+  margin-left: 10px;
 }
 </style>

@@ -2,9 +2,7 @@
   <div>
     <ul>
       <li v-for="vark in varkList" :key="vark.id">
-        <div>{{ vark.account.nickname }}</div>
-        <div>{{ vark.account.name }}</div>
-        <div>{{ vark.content }}</div>
+        <vark :data="vark"/>
       </li>
     </ul>
   </div>
@@ -14,6 +12,7 @@
 import { ref } from 'vue';
 import { readVarkRoad } from '@/api/vark';
 import { readAccount } from '@/api/account';
+import Vark from './Vark.vue';
 const varkList = ref([]);
 
 const props = defineProps({
@@ -41,7 +40,6 @@ eventSourcee.onopen = async () => {
     };
   });
   varkList.value = await Promise.all(promises);
-  console.log(varkList.value);
 };
 </script>
 
