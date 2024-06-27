@@ -1,0 +1,35 @@
+*{
+    box-sizing: border-box;
+}
+.flex{
+    display: flex;
+}
+
+.flex-vertical-center{
+    display: flex;
+    align-items: center;
+}
+
+.flex-horizontal-center{
+    display: flex;
+    justify-content: center;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.symbolic-bg-color{
+    background-color: rgb(171, 220, 170);
+}
+
+.header-box{
+    height: 50px;
+    border-bottom: 1px solid var(--boundaryColor);
+}
+
+:root{
+    --boundaryColor: rgb(209, 255, 216);
+}

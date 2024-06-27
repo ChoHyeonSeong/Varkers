@@ -1,10 +1,8 @@
 <template>
   <div>
-    <ul>
-      <li v-for="vark in varkList" :key="vark.id">
+    <div v-for="vark in varkList" :key="vark.id">
         <vark :data="vark"/>
-      </li>
-    </ul>
+    </div>
   </div>
 </template>
 
@@ -13,6 +11,7 @@ import { ref } from 'vue';
 import { readVarkRoad } from '@/api/vark';
 import { readAccount } from '@/api/account';
 import Vark from './Vark.vue';
+
 const varkList = ref([]);
 
 const props = defineProps({
@@ -42,9 +41,3 @@ eventSourcee.onopen = async () => {
   varkList.value = await Promise.all(promises);
 };
 </script>
-
-<style scoped>
-li {
-  list-style: none;
-}
-</style>

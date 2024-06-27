@@ -1,16 +1,13 @@
 <template>
-  <div class="btn-box flex-center" @click="mainStore.toggleVarkCompose">
-    <div>외치기</div>
-  </div>
+  <vark-road :accountId="mainStore.currentAccount.id" />
 </template>
 
 <script setup>
 import { useMainStore } from '@/stores/main';
+import VarkRoad from '../VarkRoad.vue';
+
 const mainStore = useMainStore();
 </script>
 
 <style scoped>
-.btn-box {
-  height: 30px;
-}
 </style>

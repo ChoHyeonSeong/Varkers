@@ -15,7 +15,7 @@
 <style scoped>
 .box-header {
   height: 50px;
-  border-bottom: 1px solid rgb(209, 255, 216);
+  border-bottom: 1px solid ;
   display: flex;
   justify-content: flex-end;
   align-items: center;
