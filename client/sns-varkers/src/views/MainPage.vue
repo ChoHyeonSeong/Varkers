@@ -11,7 +11,7 @@
       <main-body />
     </div>
     <div class="right-box sticky-box">
-      <right-header class="header-box symbolic-bg-color" />
+      <right-header class="header-box symbolic-bg-color " />
       <right-body />
     </div>
   </div>
@@ -43,6 +43,10 @@ import RightBody from '@/components/MainPage/Frame/RightBody.vue';
 .right-box,
 .left-box {
   flex-grow: 1;
+}
+
+.side-space{
+  width: 300px;
 }
 
 .sticky-box {

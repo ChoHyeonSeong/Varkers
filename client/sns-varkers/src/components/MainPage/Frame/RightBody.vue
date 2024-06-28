@@ -1,26 +1,16 @@
 <template>
-  <div class="box-body">
-    <div class="right-box-block"> 
-        <div class="user-block">
-            유저 이메일
-        </div>
-    </div>
+  <div class="side-header-box">
+
   </div>
+  <user-email />
 </template>
 
-<script>
-export default {};
+<script setup>
+import UserEmail from '../UserEmail.vue';
 </script>
 
 <style scoped>
-.box-body {
-  display: flex;
-}
-.right-box-block {
+.side-header-box{
   width: 300px;
-}
-.user-block {
-  display: flex;
-  border: 1px solid black;
 }
 </style>
