@@ -1,7 +1,7 @@
 <template>
   <div>
-  <vark-menu class="header-box" />
-  <vark-compose />
+    <vark-menu class="header-box" />
+    <vark-compose/>
   </div>
 </template>
 
@@ -10,5 +10,4 @@ import VarkCompose from '../VarkCompose.vue';
 import VarkMenu from '../VarkMenu.vue';
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

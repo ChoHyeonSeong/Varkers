@@ -1,8 +1,7 @@
 <template>
-  <div class="side-header-box">
-
+  <div>
+    <user-email />
   </div>
-  <user-email />
 </template>
 
 <script setup>

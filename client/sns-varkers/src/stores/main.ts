@@ -1,10 +1,12 @@
 import { readAccount } from '@/api/account';
+import { createVark } from '@/api/vark';
 import { defineStore } from 'pinia';
+import {ResponseAccount} from '@/api/account';
 
 export const useMainStore = defineStore('main', {
   state: () => ({
     showVarkCompose: false,
-    currentAccount: Object,
+    currentAccount: {},
   }),
   actions: {
     toggleVarkCompose() {
@@ -14,5 +16,17 @@ export const useMainStore = defineStore('main', {
       const { data } = await readAccount(currentAccountId);
       this.currentAccount = data;
     },
+    async createVarkFromCurrentAccount(content:string){
+      try {
+        const varkData = {
+          accountId:this.currentAccount.id,
+          content:content
+        };
+        const { data } = await createVark(varkData);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 });

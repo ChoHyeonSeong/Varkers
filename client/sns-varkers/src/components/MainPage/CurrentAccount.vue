@@ -1,9 +1,9 @@
 <template>
-  <div class="align-items-center">
-    <div class="image-block bg-real-lightgreen"></div>
+  <div class="flex-vertical-center account-box">
+    <div class="image-box symbolic-bg-color"></div>
     <div>
-      <div class="nickname-block">{{ mainStore.currentAccount.nickname }}</div>
-      <div class="name-block">@{{ mainStore.currentAccount.name }}</div>
+      <div class="nickname-box">{{ mainStore.currentAccount.nickname }}</div>
+      <div class="name-box">@{{ mainStore.currentAccount.name }}</div>
     </div>
   </div>
 </template>
@@ -14,24 +14,20 @@ const mainStore = useMainStore();
 </script>
 
 <style scoped>
-.align-items-center {
-  display: flex;
-  align-items: center;
+.account-box {
+  border: 1px solid black;
+  margin-top: 20px;
 }
-
-.nickname-block {
+.nickname-box {
   font-weight: bold;
 }
 
-.name-block {
+.name-box {
   color: gray;
 }
-.image-block {
+.image-box {
   width: 40px;
   height: 40px;
   margin-right: 4px;
-}
-.bg-real-lightgreen {
-  background-color: rgb(171, 220, 170);
 }
 </style>

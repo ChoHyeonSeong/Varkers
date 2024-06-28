@@ -9,5 +9,6 @@
 <style scoped>
 .email-box {
   border: 1px solid black;
+  margin-top: 20px;
 }
 </style>

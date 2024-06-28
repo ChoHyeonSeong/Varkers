@@ -22,7 +22,7 @@
 }
 
 .symbolic-bg-color{
-    background-color: rgb(171, 220, 170);
+    background-color: rgb(193, 232,197);
 }
 
 .header-box{
@@ -31,5 +31,5 @@
 }
 
 :root{
-    --boundaryColor: rgb(209, 255, 216);
+    --boundaryColor: rgb(248,249,250);
 }

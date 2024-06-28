@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <search-bar />
-  </div>
+  <search-bar />
 </template>
 
 <script setup>

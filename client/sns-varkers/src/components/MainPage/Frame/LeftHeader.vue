@@ -1,38 +1,10 @@
 <template>
-  <div class="box-header">
-    <div class="left-box-block align-center">
-      <img id="logo" src="/varkers-bg.png"/>
-    </div>
-  </div>
+  <varkers-logo/>
 </template>
 
-<script>
-    export default {
-        
-    }
+<script setup>
+import VarkersLogo from '../VarkersLogo.vue'
 </script>
 
 <style scoped>
-.box-header {
-  height: 50px;
-  border-bottom: 1px solid ;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.left-box-block{
-  width: 300px;
-}
-
-.align-center {
-  display: flex;
-  align-items: center;
-}
-
-#logo{
-  width: 44px;
-  height: 44px;
-  margin-left: 10px;
-}
 </style>
