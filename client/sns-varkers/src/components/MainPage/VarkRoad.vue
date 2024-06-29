@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h3>바크 로드</h3>
-    <ul>
-      <li v-for="vark in varkList" :key="vark.id">
-        <p>{{ vark.content }}</p>
-      </li>
-    </ul>
+    <div v-for="vark in varkList" :key="vark.id">
+        <vark :data="vark"/>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { readVarkRoad } from '@/api/vark';
+import { readAccount } from '@/api/account';
+import Vark from './Vark.vue';
+
 const varkList = ref([]);
 
 const props = defineProps({
@@ -19,13 +19,25 @@ const props = defineProps({
 });
 
 const eventSourcee = new EventSource(`http://localhost:7002/subscribe/${props.accountId}`);
-eventSourcee.addEventListener('create', (e) => {
-  varkList.value.unshift(JSON.parse(e.data));
+eventSourcee.addEventListener('create', async (e) => {
+  const vark = JSON.parse(e.data);
+  const account = await readAccount(vark.accountId);
+  vark.account=account.data;
+  varkList.value.unshift(vark);
 });
+
 eventSourcee.onopen = async () => {
   const { data } = await readVarkRoad(props.accountId);
-  varkList.value = data;
+  const promises = data.map(async (vark) => {
+    const account = await readAccount(vark.accountId);
+    return {
+      id:vark.id,
+      account:account.data,
+      content:vark.content,
+      createdAt:vark.createdAt,
+      updatedAt:vark.updatedAt,
+    };
+  });
+  varkList.value = await Promise.all(promises);
 };
 </script>
-
-<style scoped></style>

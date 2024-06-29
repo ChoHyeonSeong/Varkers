@@ -30,7 +30,7 @@ async function submitForm() {
       password: password.value,
     };
     const { data } = await signInUser(userData);
-    mainStore.initMainStore(data.currentAccountId);
+    await mainStore.initMainStore(data.currentAccountId);
     router.push('/main');
   } catch (error) {
     console.log(error);

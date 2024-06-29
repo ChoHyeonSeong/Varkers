@@ -1,47 +1,42 @@
 <template>
-  <Teleport to="body">
-    <form @submit.prevent="registerVark">
-      <modal-base :show="mainStore.showVarkCompose" @close="mainStore.toggleVarkCompose">
-        <template #header>
-          <h3>Vark Register</h3>
-        </template>
-        <template #body>
-          <input type="text" v-model="content" />
-        </template>
-        <template #footer>
-          <button type="submit">Register</button>
-        </template>
-      </modal-base>
-    </form>
-  </Teleport>
+  <div class="flex-center compose-box" v-if="showComposeBox"> 
+    <textarea class="compose-area" v-model="content"></textarea>
+  </div>
+  <div class="header-box flex-center" style="height: 30px" @click="toggleComposeBox">
+    <div>외치기</div>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import ModalBase from '../common/ModalBase.vue';
 import { useMainStore } from '@/stores/main';
-import { createVark } from '@/api/vark';
-
-const content = ref('');
-
+import { ref } from 'vue';
 const mainStore = useMainStore();
 
-async function registerVark() {
-  try {
-    mainStore.toggleVarkCompose();
-    const varkData = {
-      accountId: mainStore.currentAccountId,
-      content: content.value,
-    };
-    const { data } = await createVark(varkData);
-    console.log(data);
-  } catch (error) {
-    console.log(error);
+const showComposeBox = ref(false);
+const content = ref('');
+
+async function toggleComposeBox() {
+  showComposeBox.value = !showComposeBox.value;
+  if(!showComposeBox.value && content.value!==''){
+    await mainStore.createVarkFromCurrentAccount(content.value);
+    initContent();
   }
-  initVark();
 }
 
-function initVark() {
-  content.value = '';
+function initContent(){
+  content.value='';
 }
 </script>
+
+<style scoped>
+.compose-area{
+  border: 1px solid black;
+  margin: 10px;
+  height: 180px;
+  width: 580px;
+}
+.compose-box {
+  height: 200px;
+  background-color: white;
+}
+</style>

@@ -1,7 +1,8 @@
 <template>
-  <div>
     <router-view></router-view>
-  </div>
 </template>
 
-<style scoped></style>
+<style>
+@import './assets/css/reset.css';
+@import './assets/css/common.css';
+</style>
