@@ -4,6 +4,10 @@ function readAccount(accountId:number){
     return account.get<ResponseAccount>(`/${accountId}`);
 }
 
+function readUserAccounts(userId:number){
+    return account.get<ResponseAccount[]>(`/user/${userId}`);
+}
+
 interface ResponseAccount{
     id:number;
     userId:number;
@@ -11,12 +15,9 @@ interface ResponseAccount{
     name:string;
     nickname:string;
     description:string;
-    createdAt:Date;
-    updatedAt:Date;
-    deletedAt:Date;
 }
 
-export {readAccount};
+export {readAccount, readUserAccounts};
 
 export type{
     ResponseAccount,
