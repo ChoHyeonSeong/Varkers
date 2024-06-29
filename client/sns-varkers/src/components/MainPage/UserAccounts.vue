@@ -3,10 +3,10 @@
     <ul>
       <template v-for="account in accounts" :key="account.id">
         <li>
-          <a href="#">{{ account.name }}</a>
+          <div><account :data="account" /></div>
         </li>
       </template>
-      <li><a href="#">계정추가</a></li>
+      <li><div>계정추가</div></li>
     </ul>
   </div>
 </template>
@@ -14,9 +14,12 @@
 <script setup>
 import { useMainStore } from '@/stores/main';
 import { ref } from 'vue';
+import Account from './Account.vue';
 const mainStore = useMainStore();
 const accounts = ref([]);
-mainStore.accountMap.forEach((a) => accounts.value.push(a));
+mainStore.accountMap.forEach((a) => {
+  if (mainStore.currentAccount.id !== a.id) accounts.value.push(a);
+});
 </script>
 
 <style scoped>

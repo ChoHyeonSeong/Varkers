@@ -1,10 +1,6 @@
 <template>
-  <div class="flex-vertical-center account-box" @click="toggleUserAccounts">
-    <div class="image-box symbolic-bg-color"></div>
-    <div>
-      <div class="nickname-box">{{ mainStore.currentAccount.nickname }}</div>
-      <div class="name-box">@{{ mainStore.currentAccount.name }}</div>
-    </div>
+  <div class="account-box" @click="toggleUserAccounts">
+    <account :data="mainStore.currentAccount" />
   </div>
   <user-accounts v-if="showUserAccounts" />
 </template>
@@ -13,6 +9,7 @@
 import { ref } from 'vue';
 import { useMainStore } from '@/stores/main';
 import UserAccounts from './UserAccounts.vue';
+import Account from './Account.vue';
 
 const mainStore = useMainStore();
 const showUserAccounts = ref(false);
