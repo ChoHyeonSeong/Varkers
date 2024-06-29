@@ -9,7 +9,7 @@ export const useMainStore = defineStore('main', {
     user:{} as ResponseUser,
     showVarkCompose: false,
     currentAccount: {} as ResponseAccount,
-    accountMap: {} as Map<number,ResponseAccount>,
+    accountMap: new Map<number,ResponseAccount>,
   }),
   actions: {
     toggleVarkCompose() {
@@ -17,11 +17,10 @@ export const useMainStore = defineStore('main', {
     },
     async initMainStore(user: ResponseUser) {
       this.user = user;
-      const { currentAccount } = await readAccount(user.currentAccountId);
-      const { datas } = await readUserAccounts(user.id);
-      datas.
-      this.accountMap.set()
-      this.currentAccount = currentAccount;
+      const currentAccount = await readAccount(user.currentAccountId);
+      const userAccounts = await readUserAccounts(user.id);
+      userAccounts.data.forEach(a=> this.accountMap.set(a.id,a));
+      this.currentAccount = currentAccount.data;
     },
     async createVarkFromCurrentAccount(content:string){
       try {

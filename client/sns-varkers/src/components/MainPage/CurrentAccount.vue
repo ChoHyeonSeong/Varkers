@@ -10,6 +10,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useMainStore } from '@/stores/main';
 import UserAccounts from './UserAccounts.vue';
 
