@@ -30,6 +30,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<AccountDTO> readUserAccounts(Long userId) {
+        return dao.readUserAccounts(userId)
+                .stream()
+                .map(e-> mapper.map(e, AccountDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public AccountDTO readAccount(Long id) {
         return mapper.map(dao.readAccount(id),AccountDTO.class);
     }

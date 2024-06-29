@@ -3,6 +3,8 @@ package com.jhs.varkers.account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/account")
@@ -17,6 +19,10 @@ public class AccountController {
     @GetMapping("/{accountId}")
     public AccountDTO readAccount(@PathVariable Long accountId){
         return accountService.readAccount(accountId);
+    }
+    @GetMapping("/user/{userId}")
+    public List<AccountDTO> readUserAccounts(@PathVariable Long userId){
+        return accountService.readUserAccounts(userId);
     }
 
     @PutMapping

@@ -43,7 +43,7 @@ import RightBody from '@/components/MainPage/Frame/RightBody.vue';
 .main-box {
   height: 100%;
   width: 600px;
-  border: 1px solid rgb(248,249,250);
+  border: 1px solid rgb(248, 249, 250);
   border-top: none;
   border-bottom: none;
 }

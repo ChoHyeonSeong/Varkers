@@ -22,17 +22,6 @@ interface RequestVark{
   content:string;
 }
 
-interface ResponseAccount{
-    id:number;
-    userId:number;
-    profileImage:string;
-    name:string;
-    nickname:string;
-    description:string;
-    createdAt:Date;
-    updatedAt:Date;
-    deletedAt:Date;
-}
 
 
 export {readVarkOfAccount,readVarkRoad,createVark,deleteVark};
