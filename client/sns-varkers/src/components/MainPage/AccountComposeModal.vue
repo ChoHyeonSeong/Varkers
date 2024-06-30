@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <form @submit.prevent="registerAccount">
+    <form @submit.prevent="createAccount">
       <modal-base :show="mainStore.showAccountCompose" class="compose-box">
         <template #header>
           <button type="button" @click="cancelCompose">X</button>
@@ -29,14 +29,14 @@ const description = ref('');
 
 const mainStore = useMainStore();
 
-async function registerAccount() {
+async function createAccount() {
   const accountData = {
     userId: mainStore.user.id,
     name: nickname.value,
     nickname: name.value,
     description: description.value,
   };
-
+  mainStore.toggleAccountCompose();
   await mainStore.createAccount(accountData);
   initCompose();
 }

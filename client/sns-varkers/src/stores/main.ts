@@ -20,20 +20,20 @@ export const useMainStore = defineStore('main', {
       this.showUserAccounts = !this.showUserAccounts;
     },
     changeCurrentAccount(index : number){
-      this.toggleUserAccounts();
       this.currentAccount = this.accountList[index];
     },
     async createAccount(accountData : ResponseAccount){
-      this.toggleAccountCompose();
       const { data } = await createAccount(accountData);
       this.accountList.push(data);
     },
     async initMainStore(user: ResponseUser) {
       this.user = user;
-      const currentAccount = await readAccount(user.currentAccountId);
       const userAccounts = await readUserAccounts(user.id);
-      userAccounts.data.forEach(a=> this.accountList.push(a));
-      this.currentAccount = currentAccount.data;
+      userAccounts.data.forEach(a=> {
+        this.accountList.push(a)
+        if(a.id == user.currentAccountId)
+          this.currentAccount = a;
+      });
     },
     async createVarkFromCurrentAccount(content:string){
       try {
