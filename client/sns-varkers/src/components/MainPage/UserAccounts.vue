@@ -1,25 +1,44 @@
 <template>
   <div class="accounts-box relative">
     <ul>
-      <template v-for="account in accounts" :key="account.id">
-        <li>
-          <div><account :data="account" /></div>
+      <template v-for="(account, i) in mainStore.accountList" :key="i">
+        <li v-if="mainStore.currentAccount.id != mainStore.accountList[i].id">
+          <div @click="mainStore.changeCurrentAccount(i)"><account :data="account" /></div>
         </li>
       </template>
-      <li><div>계정추가</div></li>
+      <li><div @click="mainStore.toggleAccountCompose">계정추가</div></li>
     </ul>
   </div>
 </template>
 
 <script setup>
 import { useMainStore } from '@/stores/main';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Account from './Account.vue';
 const mainStore = useMainStore();
 const accounts = ref([]);
-mainStore.accountMap.forEach((a) => {
-  if (mainStore.currentAccount.id !== a.id) accounts.value.push(a);
-});
+
+// watch(
+//   mainStore.accountMap,
+//   (state) => {
+//     fetchAccounts(state);
+//     console.log(state);
+//   },
+//   { deep: true },
+// );
+
+// watch(
+//   mainStore.currentAccount
+// )
+
+// function fetchAccounts(accountMap) {
+//   accounts.value = [];
+//   accountMap.forEach((a) => {
+//     if (mainStore.currentAccount.id !== a.id) accounts.value.push(a);
+//   });
+// }
+
+// fetchAccounts(mainStore.accountMap);
 </script>
 
 <style scoped>

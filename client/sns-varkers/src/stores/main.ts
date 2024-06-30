@@ -1,4 +1,4 @@
-import { readAccount, readUserAccounts } from '@/api/account';
+import { createAccount, readAccount, readUserAccounts } from '@/api/account';
 import { createVark } from '@/api/vark';
 import { defineStore } from 'pinia';
 import type { ResponseAccount } from '@/api/account';
@@ -7,19 +7,32 @@ import type { ResponseUser } from '@/api/auth';
 export const useMainStore = defineStore('main', {
   state: () => ({
     user:{} as ResponseUser,
-    showVarkCompose: false,
+    showAccountCompose: false,
+    showUserAccounts: false,
     currentAccount: {} as ResponseAccount,
-    accountMap: new Map<number,ResponseAccount>,
+    accountList: [] as ResponseAccount[],
   }),
   actions: {
-    toggleVarkCompose() {
-      this.showVarkCompose = !this.showVarkCompose;
+    toggleAccountCompose() {
+      this.showAccountCompose = !this.showAccountCompose;
+    },
+    toggleUserAccounts() {
+      this.showUserAccounts = !this.showUserAccounts;
+    },
+    changeCurrentAccount(index : number){
+      this.toggleUserAccounts();
+      this.currentAccount = this.accountList[index];
+    },
+    async createAccount(accountData : ResponseAccount){
+      this.toggleAccountCompose();
+      const { data } = await createAccount(accountData);
+      this.accountList.push(data);
     },
     async initMainStore(user: ResponseUser) {
       this.user = user;
       const currentAccount = await readAccount(user.currentAccountId);
       const userAccounts = await readUserAccounts(user.id);
-      userAccounts.data.forEach(a=> this.accountMap.set(a.id,a));
+      userAccounts.data.forEach(a=> this.accountList.push(a));
       this.currentAccount = currentAccount.data;
     },
     async createVarkFromCurrentAccount(content:string){

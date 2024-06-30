@@ -12,9 +12,8 @@ public class AccountController {
     private final AccountService accountService;
 
     @PostMapping
-    public String createAccount(@RequestBody AccountDTO account){
-        accountService.createAccount(account);
-        return "OK";
+    public AccountDTO createAccount(@RequestBody AccountDTO account){
+        return accountService.createAccount(account);
     }
     @GetMapping("/{accountId}")
     public AccountDTO readAccount(@PathVariable Long accountId){

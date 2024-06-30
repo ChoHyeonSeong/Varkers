@@ -11,8 +11,8 @@ public class AccountDAOImpl implements AccountDAO {
     private final AccountRepository repo;
 
     @Override
-    public void createAccount(AccountEntity entity) {
-        repo.save(entity);
+    public AccountEntity createAccount(AccountEntity entity) {
+        return repo.save(entity);
     }
 
     @Override

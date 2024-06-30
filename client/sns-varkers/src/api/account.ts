@@ -8,6 +8,10 @@ function readUserAccounts(userId:number){
     return account.get<ResponseAccount[]>(`/user/${userId}`);
 }
 
+function createAccount(accountData : RequestAccount){
+    return account.post<ResponseAccount>('',accountData);
+}
+
 interface ResponseAccount{
     id:number;
     userId:number;
@@ -17,8 +21,17 @@ interface ResponseAccount{
     description:string;
 }
 
-export {readAccount, readUserAccounts};
+interface RequestAccount{
+    userId:number;
+    profileImage?:string;
+    name:string;
+    nickname:string;
+    description:string;
+}
+
+export {readAccount, readUserAccounts, createAccount};
 
 export type{
     ResponseAccount,
+    RequestAccount,
 }

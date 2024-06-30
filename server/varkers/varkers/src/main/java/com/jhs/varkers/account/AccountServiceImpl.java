@@ -18,8 +18,9 @@ public class AccountServiceImpl implements AccountService {
     private final ListeningService listeningService;
 
     @Override
-    public void createAccount(AccountDTO dto) {
-        dao.createAccount(mapper.map(dto,AccountEntity.class));
+    public AccountDTO createAccount(AccountDTO dto) {
+        AccountEntity entity =  dao.createAccount(mapper.map(dto,AccountEntity.class));
+        return mapper.map(entity,AccountDTO.class);
     }
 
     @Override
