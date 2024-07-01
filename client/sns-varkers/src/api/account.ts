@@ -1,11 +1,11 @@
 import { account } from "./index";
 
 function readAccount(accountId:number){
-    return account.get<ResponseAccount>(`/${accountId}`);
+    return account.get<ResponseAccount>(`${accountId}`);
 }
 
 function readUserAccounts(userId:number){
-    return account.get<ResponseAccount[]>(`/user/${userId}`);
+    return account.get<ResponseAccount[]>(`user/${userId}`);
 }
 
 function createAccount(accountData : RequestAccount){

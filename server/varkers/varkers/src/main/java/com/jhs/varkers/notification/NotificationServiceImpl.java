@@ -51,4 +51,9 @@ public class NotificationServiceImpl implements NotificationService {
 
         return emitter;
     }
+
+    @Override
+    public void cancelSubscribe(Long accountId) {
+        emitterRepo.deleteById(accountId);
+    }
 }

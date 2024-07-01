@@ -17,3 +17,4 @@ function createInstanceWithAuth(url:string) {
 export const user = createInstance('user');
 export const vark = createInstanceWithAuth('vark');
 export const account = createInstanceWithAuth('account');
+export const notification = createInstanceWithAuth('notification');

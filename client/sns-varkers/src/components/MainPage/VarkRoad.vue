@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onBeforeUnmount } from 'vue';
 import { readVarkRoad } from '@/api/vark';
 import { readAccount } from '@/api/account';
 import Vark from './Vark.vue';
@@ -18,19 +18,24 @@ const props = defineProps({
   accountId: Number,
 });
 
+const sseConnection = ref(createEventSource(props.accountId));
+
 watch(
   () => props.accountId,
   (newAccountId) => {
-    eventSource.close();
+    sseConnection.value.close();
     console.log('계정변경!');
-    eventSource = createEventSource(newAccountId);
+    sseConnection.value = createEventSource(newAccountId);
   },
 );
-
-let eventSource = createEventSource(props.accountId);
+onBeforeUnmount(() => {
+  sseConnection.value.close();
+});
 
 function createEventSource(accountId) {
-  const newEventSourcee = new EventSource(`http://localhost:7002/subscribe/${accountId}`);
+  const newEventSourcee = new EventSource(
+    `http://localhost:7002/notification/subscribe/${accountId}`,
+  );
   newEventSourcee.addEventListener('create', async (e) => {
     const vark = JSON.parse(e.data);
     const account = await readAccount(vark.accountId);
@@ -52,6 +57,11 @@ function createEventSource(accountId) {
     });
     varkList.value = await Promise.all(promises);
   };
+
+  newEventSourcee.onerror = async () => {
+    newEventSourcee.close();
+  };
+
   return newEventSourcee;
 }
 </script>
