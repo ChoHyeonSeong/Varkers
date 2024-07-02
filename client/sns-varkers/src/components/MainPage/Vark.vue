@@ -13,7 +13,7 @@
     </div>
     <div class="flex left-space btn-box">
       <!-- 버튼 영역 -->
-      <div>답글</div>
+      <div @click="mainStore.toggleVarkComposeModal">답글</div>
       <div>재게시</div>
       <div>북마크</div>
       <div>공유</div>
@@ -22,8 +22,11 @@
 </template>
 
 <script setup>
-import { account } from '@/api';
 import Account from './Account.vue';
+import { useMainStore } from '@/stores/main';
+
+
+const mainStore = useMainStore();
 
 const props = defineProps({
   data: Object,

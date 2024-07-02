@@ -8,9 +8,6 @@ body{
 	font: inherit;
 	-ms-overflow-style: none; 
 }
-::-webkit-scrollbar {
-	display: none;
-}
 
 #app{
     height: 100vh;

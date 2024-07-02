@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <form @submit.prevent="registerVark">
-      <modal-base :show="mainStore.showVarkCompose" @close="mainStore.toggleVarkCompose">
+      <modal-base :show="mainStore.showVarkComposeModal">
         <template #header>
           <button type="button" @click="cancelCompose">X</button>
         </template>
@@ -42,7 +42,7 @@ async function registerVark() {
 }
 
 function cancelCompose(){
-  mainStore.toggleVarkCompose();
+  mainStore.toggleVarkComposeModal();
   initVark();
 }
 

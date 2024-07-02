@@ -9,6 +9,8 @@ export const useMainStore = defineStore('main', {
     user:{} as ResponseUser,
     showAccountCompose: false,
     showUserAccounts: false,
+    showVarkComposeBox: false,
+    showVarkComposeModal: false,
     currentAccount: {} as ResponseAccount,
     accountList: [] as ResponseAccount[],
   }),
@@ -18,6 +20,12 @@ export const useMainStore = defineStore('main', {
     },
     toggleUserAccounts() {
       this.showUserAccounts = !this.showUserAccounts;
+    },
+    toggleVarkComposeBox() {
+      this.showVarkComposeBox = !this.showVarkComposeBox;
+    },
+    toggleVarkComposeModal() {
+      this.showVarkComposeModal = !this.showVarkComposeModal;
     },
     changeCurrentAccount(index : number){
       this.currentAccount = this.accountList[index];
