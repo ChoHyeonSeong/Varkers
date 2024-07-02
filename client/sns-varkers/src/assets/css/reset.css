@@ -6,6 +6,10 @@ body{
 	border: 0;
 	font-size: 100%;
 	font: inherit;
+	-ms-overflow-style: none; 
+}
+::-webkit-scrollbar {
+	display: none;
 }
 
 #app{

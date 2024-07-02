@@ -36,16 +36,17 @@ import RightBody from '@/components/MainPage/Frame/RightBody.vue';
 
 <style scoped>
 .main-page {
-  height: 100%;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
 }
 .main-box {
-  height: 100%;
+  height: 100vh;
   width: 600px;
   border: 1px solid rgb(248, 249, 250);
   border-top: none;
   border-bottom: none;
+  overflow: auto;
 }
 
 .side-box {

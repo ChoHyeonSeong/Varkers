@@ -18,10 +18,5 @@ public class NotificationController {
     public SseEmitter subscribe(@PathVariable Long accountId) {
         return notificationService.subscribe(accountId);
     }
-
-    @GetMapping("/cancel/{accountId}")
-    public String cancelSubscribe(@PathVariable Long accountId){
-        return "";
-    }
 }
 

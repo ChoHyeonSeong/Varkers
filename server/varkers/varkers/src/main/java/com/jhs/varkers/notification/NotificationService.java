@@ -6,5 +6,4 @@ public interface NotificationService {
     SseEmitter subscribe(Long accountId);
     SseEmitter createEmitter(Long accountId);
     void sendToClient(Long accountId,Object data, String type);
-    void cancelSubscribe(Long accountId);
 }

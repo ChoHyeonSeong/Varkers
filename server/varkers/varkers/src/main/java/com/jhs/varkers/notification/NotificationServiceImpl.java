@@ -19,6 +19,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public SseEmitter subscribe(Long accountId) {
         SseEmitter emitter = createEmitter(accountId);
+
         sendToClient(accountId, "EventStream Created. [accountId="+ accountId + "]","subscribe");
         return emitter;
     }
@@ -48,12 +49,8 @@ public class NotificationServiceImpl implements NotificationService {
 
         emitter.onCompletion(()->emitterRepo.deleteById(accountId));
         emitter.onTimeout(()->emitterRepo.deleteById(accountId));
+        emitter.onError((e)->emitterRepo.deleteById(accountId));
 
         return emitter;
-    }
-
-    @Override
-    public void cancelSubscribe(Long accountId) {
-        emitterRepo.deleteById(accountId);
     }
 }

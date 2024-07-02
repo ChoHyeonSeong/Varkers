@@ -33,7 +33,7 @@ function initContent(){
   border: 1px solid black;
   margin: 10px;
   height: 180px;
-  width: 580px;
+  width: 95%;
 }
 .compose-box {
   height: 200px;
