@@ -3,6 +3,8 @@ import { createVark } from '@/api/vark';
 import { defineStore } from 'pinia';
 import type { ResponseAccount } from '@/api/account';
 import type { ResponseUser } from '@/api/auth';
+import { createReceiver } from '@/api/receiver';
+import { sendVark } from '@/api/notify';
 
 export const useMainStore = defineStore('main', {
   state: () => ({
@@ -43,14 +45,22 @@ export const useMainStore = defineStore('main', {
           this.currentAccount = a;
       });
     },
-    async createVarkFromCurrentAccount(content:string){
+    async createVark(content:string){
       try {
         const varkData = {
           accountId:this.currentAccount.id,
           content:content
         };
-        const { data } = await createVark(varkData);
-        console.log(data);
+        const responseVark = await createVark(varkData);
+        
+        const receiverData = {
+          varkId:responseVark.data.id,
+          accountIds:[this.currentAccount.id]
+        };
+
+        const receiver = await createReceiver(receiverData);
+        const notify = await sendVark(responseVark.data.id);
+
       } catch (error) {
         console.log(error);
       }

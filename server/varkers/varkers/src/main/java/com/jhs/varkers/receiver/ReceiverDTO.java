@@ -1,16 +1,17 @@
-package com.jhs.varkers.vark.receiver;
+package com.jhs.varkers.receiver;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VarkReceiverDTO {
-    private Long id;
+public class ReceiverDTO {
     private Long varkId;
-    private Long accountId;
+    private List<Long> accountIds;
 }

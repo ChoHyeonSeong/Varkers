@@ -7,6 +7,8 @@ import com.jhs.varkers.listening.ListeningDTO;
 import com.jhs.varkers.listening.ListeningEntity;
 import com.jhs.varkers.listening.ListeningService;
 import com.jhs.varkers.notification.NotificationService;
+import com.jhs.varkers.receiver.ReceiverDTO;
+import com.jhs.varkers.receiver.ReceiverService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -24,21 +26,13 @@ public class VarkServiceImpl implements VarkService {
     private final ListeningService listeningService;
     private final ModelMapper mapper;
 
-    private static final String SEND_CREATE_TYPE = "create";
 
     @Override
-    public void createVark(VarkDTO dto) {
-        VarkEntity entity = mapper.map(dto,VarkEntity.class);
+    public VarkDTO createVark(VarkDTO dto) {
+        // 엔티티 생성
+        VarkEntity entity = mapper.map(dto, VarkEntity.class);
         dao.createVark(entity);
-        VarkDTO sendDTO = mapper.map(entity,VarkDTO.class);
-        List<Long> listenerList = listeningService.readByListeningId(sendDTO.getAccountId())
-                .stream()
-                .map(ListeningDTO::getAccountId)
-                .collect(Collectors.toList());
-        listenerList.add(sendDTO.getAccountId());
-        listenerList.forEach(l->{
-            notificationService.sendToClient(l,sendDTO,SEND_CREATE_TYPE);
-        });
+        return mapper.map(entity, VarkDTO.class);
     }
 
     @Override

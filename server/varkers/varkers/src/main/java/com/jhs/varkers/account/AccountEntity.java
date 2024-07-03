@@ -22,9 +22,7 @@ public class AccountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private Long userId;
     private String profileImage;
     private String name;
     private String nickname;
@@ -34,13 +32,6 @@ public class AccountEntity {
     @UpdateTimestamp
     private Date updatedAt;
     private Date deletedAt;
-
-    @OneToMany(mappedBy = "account")
-    private List<VarkEntity> varks;
-
-
-    @OneToMany(mappedBy = "account")
-    private List<ListeningEntity> listenings;
 
     public void updateAccount(String name, String nickname,String profileImage, String description) {
         this.name = name;

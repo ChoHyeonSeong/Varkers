@@ -25,8 +25,7 @@ public class UserEntity {
     private Date birth;
     @CreationTimestamp
     private Date createdAt;
-    @OneToMany(mappedBy = "user")
-    private List<AccountEntity> accounts;
+
 
     public void updateCurrentAccountId(Long currentAccountId) {
         this.currentAccountId = currentAccountId;

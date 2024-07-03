@@ -39,6 +39,7 @@ function createEventSource(accountId) {
   newEventSourcee.addEventListener('create', async (e) => {
     const vark = JSON.parse(e.data);
     const account = await readAccount(vark.accountId);
+    // receiver 불러오는 로직
     vark.account = account.data;
     varkList.value.unshift(vark);
   });

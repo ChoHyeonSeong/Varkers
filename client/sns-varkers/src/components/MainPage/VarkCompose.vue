@@ -17,7 +17,7 @@ const content = ref('');
 async function toggleComposeBox() {
   mainStore.toggleVarkComposeBox();
   if(!mainStore.showVarkComposeBox && content.value!==''){
-    await mainStore.createVarkFromCurrentAccount(content.value);
+    await mainStore.createVark(content.value);
     initContent();
   }
 }

@@ -15,8 +15,6 @@ public class ListeningEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private AccountEntity account;
+    private Long accountId;
     private Long listeningId;
 }

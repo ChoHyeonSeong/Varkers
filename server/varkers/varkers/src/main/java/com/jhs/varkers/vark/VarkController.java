@@ -12,9 +12,8 @@ public class VarkController {
     private final VarkService varkService;
 
     @PostMapping
-    public String createVark(@RequestBody VarkDTO vark){
-        varkService.createVark(vark);
-        return "OK";
+    public VarkDTO createVark(@RequestBody VarkDTO vark){
+        return varkService.createVark(vark);
     }
 
     @GetMapping("/{varkId}")
