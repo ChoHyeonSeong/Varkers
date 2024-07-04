@@ -11,15 +11,16 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/notify")
-public class NotificationController {
-    private final NotificationService notificationService;
+public class NotifyController {
+    private final NotifyService notifyService;
 
     @GetMapping(value = "/subscribe/{accountId}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter subscribe(@PathVariable Long accountId) {
-        return notificationService.subscribe(accountId);
+        return notifyService.subscribe(accountId);
     }
     @GetMapping("/vark/{varkId}")
     public String sendVark(Long varkId){
+        notifyService.sendVark(varkId);
         return "OK";
     }
 }

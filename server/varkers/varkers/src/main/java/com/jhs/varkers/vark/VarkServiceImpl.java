@@ -1,12 +1,8 @@
 package com.jhs.varkers.vark;
 
-import com.jhs.varkers.account.AccountDAO;
-import com.jhs.varkers.account.AccountEntity;
-import com.jhs.varkers.account.AccountService;
 import com.jhs.varkers.listening.ListeningDTO;
-import com.jhs.varkers.listening.ListeningEntity;
 import com.jhs.varkers.listening.ListeningService;
-import com.jhs.varkers.notification.NotificationService;
+import com.jhs.varkers.notification.NotifyService;
 import com.jhs.varkers.receiver.ReceiverDTO;
 import com.jhs.varkers.receiver.ReceiverService;
 import jakarta.transaction.Transactional;
@@ -22,8 +18,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class VarkServiceImpl implements VarkService {
     private final VarkDAO dao;
-    private final NotificationService notificationService;
     private final ListeningService listeningService;
+    private final ReceiverService receiverService;
     private final ModelMapper mapper;
 
 
@@ -63,6 +59,14 @@ public class VarkServiceImpl implements VarkService {
 
         return dao.readVarkRoad(listeningList)
                 .stream()
+                .filter(e-> {
+                    ReceiverDTO receiver = receiverService.readReceivers(e.getId());
+                    if(receiver.getAccountIds().size() == 2) {
+                        return listeningService.existsByAccountIdAndListeningId(accountId, // receiver로 가져온 나머지 한명을 검사
+                                receiver.getAccountIds().get(0).equals(e.getAccountId()) ? receiver.getAccountIds().get(1):receiver.getAccountIds().get(0));
+                    }
+                    return true;
+                })
                 .map(e->mapper.map(e,VarkDTO.class))
                 .collect(Collectors.toList());
     }

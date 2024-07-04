@@ -11,6 +11,7 @@ import { ref, watch, onBeforeUnmount } from 'vue';
 import { readVarkRoad } from '@/api/vark';
 import { readAccount } from '@/api/account';
 import Vark from './Vark.vue';
+import { readReceiver } from '@/api/receiver';
 
 const varkList = ref([]);
 
@@ -34,7 +35,7 @@ onBeforeUnmount(() => {
 
 function createEventSource(accountId) {
   const newEventSourcee = new EventSource(
-    `http://localhost:7002/notification/subscribe/${accountId}`,
+    `http://localhost:7002/notify/subscribe/${accountId}`,
   );
   newEventSourcee.addEventListener('create', async (e) => {
     const vark = JSON.parse(e.data);
@@ -48,10 +49,12 @@ function createEventSource(accountId) {
     const { data } = await readVarkRoad(props.accountId);
     const promises = data.map(async (vark) => {
       const account = await readAccount(vark.accountId);
+      const receiver = await readReceiver(vark.id);
       return {
         id: vark.id,
         account: account.data,
         content: vark.content,
+        receiver: receiver.accountIds,
         createdAt: vark.createdAt,
         updatedAt: vark.updatedAt,
       };
