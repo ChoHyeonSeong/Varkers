@@ -21,6 +21,11 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
+    public List<AccountEntity> readAccounts(List<Long> accountIds) {
+        return repo.findByIdIn(accountIds);
+    }
+
+    @Override
     public List<AccountEntity> readUserAccounts(Long userId) {
         return repo.findByUserId(userId);
     }

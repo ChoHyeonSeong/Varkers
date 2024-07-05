@@ -18,3 +18,7 @@
     - join해서 테이블 만들고, in에 account id을 넣는다
 8. vark를 불러오고 account를 한번 더 불러와야하는데, Unhandled error during execution(속성에 접근할수없음) 문제발생
     - 아마도 async문제
+9. hikari CP 커넥션 풀 문제. 같은 요청을 여러번 보내니 timeout이 걸림
+    - JPA를 사용하면 SSE 통신을 하는 동안은 HTTP Connection이 계속 열려 있음.
+    - open in view 속성, 즉 영속성 컨텍스트가 지속되는 것이 기본값이기 때문.
+    - 따라서 open in view 속성을 false로 바꿔준다.

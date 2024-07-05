@@ -19,8 +19,12 @@ public class AccountController {
     public AccountDTO readAccount(@PathVariable Long accountId){
         return accountService.readAccount(accountId);
     }
+    @GetMapping
+    public List<AccountDTO> readAccounts(@RequestParam("accounts") List<Long> accountIds){
+        return accountService.readAccounts(accountIds);
+    }
     @GetMapping("/user/{userId}")
-    public List<AccountDTO> readUserAccounts(@PathVariable Long userId){
+    public List<AccountDTO> readUserAccountsByUserId(@PathVariable Long userId){
         return accountService.readUserAccounts(userId);
     }
 

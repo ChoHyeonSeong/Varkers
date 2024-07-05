@@ -1,4 +1,9 @@
 <template>
+  <div class="flex receiver-box" v-if="data.receiver !== null">
+    <template v-for="(receiver, i) in data.receiver" :key="i">
+      <span>@{{ receiver.name }}</span>
+    </template>
+  </div>
   <div class="vark-box">
     <account :data="data.account" />
     <div class="content-box left-space">
@@ -26,7 +31,6 @@ import { useVarkStore } from '@/stores/vark';
 import Account from './Account.vue';
 import { useMainStore } from '@/stores/main';
 
-
 const mainStore = useMainStore();
 const varkStore = useVarkStore();
 
@@ -34,11 +38,10 @@ const props = defineProps({
   data: Object,
 });
 
-function toggleVarkComposeModal(){
-  varkStore.replyData = data;
+function toggleVarkComposeModal() {
+  varkStore.headVark = props.data;
   mainStore.toggleVarkComposeModal();
 }
-
 </script>
 
 <style scoped>
@@ -58,5 +61,10 @@ function toggleVarkComposeModal(){
 .vark-box {
   border-bottom: 1px solid var(--boundaryColor);
   padding: 8px;
+}
+
+.receiver-box {
+  padding: 8px;
+  border-bottom: 1px solid var(--boundaryColor);
 }
 </style>

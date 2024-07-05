@@ -61,10 +61,8 @@ public class VarkServiceImpl implements VarkService {
                 .stream()
                 .filter(e-> {
                     ReceiverDTO receiver = receiverService.readReceivers(e.getId());
-                    if(receiver.getAccountIds().size() == 2) {
-                        Long A = receiver.getAccountIds().get(0);
-                        Long B = receiver.getAccountIds().get(1);
-                        return listeningService.existsByAccountIdAndListeningId(accountId, A.equals(e.getAccountId()) ? A:B);
+                    if(receiver.getAccountIds().size() == 1) {
+                        return listeningService.existsByAccountIdAndListeningId(accountId, receiver.getAccountIds().get(0));
                     }
                     return true;
                 })

@@ -6,7 +6,7 @@
         <!-- 콘텐츠 영역 -->
         <div>
           <!-- 텍스트 영역 -->
-          {{ varkStore.replyData.content }}
+          {{ varkStore.headVark.content }}
         </div>
         <div>
           <!-- 이미지 영역 -->
@@ -36,6 +36,8 @@ import { useMainStore } from '@/stores/main';
 import { createVark } from '@/api/vark';
 import { useVarkStore } from '@/stores/vark';
 import Account from './Account.vue';
+import { createReceiver } from '@/api/receiver';
+import { sendVark } from '@/api/notify';
 
 const content = ref('');
 
@@ -44,17 +46,17 @@ const varkStore = useVarkStore();
 
 async function registerVark() {
   try {
-    mainStore.toggleVarkCompose();
+    mainStore.toggleVarkComposeModal();
     const varkData = {
-      accountId: mainStore.currentAccountId,
+      accountId: mainStore.currentAccount.id,
       content: content.value,
     };
     const responseVark = await createVark(varkData);
-    
-    const accountIds = [mainStore.currentAccount.id];
 
-    for(const a in varkStore.replyData.receiver){
-      accountIds.push(a);
+    const accountIds = [varkStore.headVark.account.id];
+
+    for (const accountId in varkStore.headVark.receiver) {
+      accountIds.push(accountId);
     }
 
     const receiverData = {
@@ -64,8 +66,6 @@ async function registerVark() {
 
     const receiver = await createReceiver(receiverData);
     const notify = await sendVark(responseVark.data.id);
-
-    console.log(data);
   } catch (error) {
     console.log(error);
   }

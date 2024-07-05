@@ -12,7 +12,10 @@
       <div class="fixed-box main-header side-border">
         <main-header class="symbolic-bg-color" />
       </div>
-      <div class="side-border" :class="mainStore.showVarkComposeBox?'compose-padding':'default-padding'">
+      <div
+        class="side-border main-body"
+        :class="mainStore.showVarkComposeBox ? 'compose-padding' : 'default-padding'"
+      >
         <main-body />
       </div>
     </div>
@@ -24,7 +27,7 @@
         <right-body class="side-components-width" />
       </div>
     </div>
-    <vark-compose-modal/>
+    <vark-compose-modal />
   </div>
 </template>
 
@@ -38,8 +41,7 @@ import RightBody from '@/components/MainPage/Frame/RightBody.vue';
 import VarkComposeModal from '@/components/MainPage/VarkComposeModal.vue';
 import { useMainStore } from '@/stores/main';
 
-const mainStore= useMainStore();
-
+const mainStore = useMainStore();
 </script>
 
 <style scoped>
@@ -70,10 +72,10 @@ const mainStore= useMainStore();
   top: 0px; /* 도달했을때 고정시킬 위치 */
 }
 
-.main-header{
+.main-header {
   width: inherit;
 }
-.side-border{
+.side-border {
   border: 1px solid rgb(248, 249, 250);
   border-top: none;
   border-bottom: none;
@@ -84,10 +86,14 @@ const mainStore= useMainStore();
   justify-content: flex-end;
 }
 
-.default-padding{
-  padding-top: 80px;
+.default-padding {
+  margin-top: 80px;
 }
-.compose-padding{
-  padding-top: 280px;
+.compose-padding {
+  margin-top: 280px;
+}
+
+.main-body {
+  height: 100vh;
 }
 </style>

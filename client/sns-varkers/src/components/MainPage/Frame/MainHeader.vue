@@ -1,7 +1,7 @@
 <template>
   <div>
     <vark-menu class="header-box" />
-    <vark-compose/>
+    <vark-compose />
   </div>
 </template>
 

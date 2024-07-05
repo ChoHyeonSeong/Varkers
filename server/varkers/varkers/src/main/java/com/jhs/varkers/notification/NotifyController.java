@@ -19,7 +19,7 @@ public class NotifyController {
         return notifyService.subscribe(accountId);
     }
     @GetMapping("/vark/{varkId}")
-    public String sendVark(Long varkId){
+    public String sendVark(@PathVariable Long varkId){
         notifyService.sendVark(varkId);
         return "OK";
     }
