@@ -52,6 +52,7 @@ export const useMainStore = defineStore('main', {
           content:content
         };
         const responseVark = await createVark(varkData);
+        console.log(responseVark);
         
         const receiverData = {
           varkId:responseVark.data.id,

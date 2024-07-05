@@ -32,8 +32,8 @@ const mainStore = useMainStore();
 async function createAccount() {
   const accountData = {
     userId: mainStore.user.id,
-    name: nickname.value,
-    nickname: name.value,
+    name: name.value,
+    nickname: nickname.value,
     description: description.value,
   };
   mainStore.toggleAccountCompose();

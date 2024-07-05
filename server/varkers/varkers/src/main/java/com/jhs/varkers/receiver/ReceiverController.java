@@ -19,6 +19,7 @@ public class ReceiverController {
 
     @PostMapping
     public String createReceiver(@RequestBody ReceiverDTO receiver) {
+        System.out.println(receiver);
         service.createReceivers(receiver);
         return "OK";
     }
