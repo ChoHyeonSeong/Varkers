@@ -20,6 +20,11 @@ public class AccountController {
         return accountService.readAccount(accountId);
     }
     @GetMapping
+    public AccountDTO readAccountByName
+            (@RequestParam String name){
+        return accountService.readAccount(accountId);
+    }
+    @GetMapping
     public List<AccountDTO> readAccounts(@RequestParam("accounts") List<Long> accountIds){
         return accountService.readAccounts(accountIds);
     }
@@ -40,4 +45,8 @@ public class AccountController {
         return "OK";
     }
 
+    @GetMapping("/check")
+    public Boolean checkName(@RequestParam String name){
+        return accountService.existsByName(name);
+    }
 }

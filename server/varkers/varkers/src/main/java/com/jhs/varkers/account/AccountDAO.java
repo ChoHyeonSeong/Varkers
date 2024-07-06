@@ -8,4 +8,5 @@ public interface AccountDAO {
     List<AccountEntity> readUserAccounts(Long userId);
     List<AccountEntity> readAccounts(List<Long> accountIds);
     void deleteAccount(Long id);
+    Boolean existsByName(String name);
 }

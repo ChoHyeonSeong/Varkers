@@ -34,4 +34,9 @@ public class AccountDAOImpl implements AccountDAO {
     public void deleteAccount(Long id) {
         repo.deleteById(id);
     }
+
+    @Override
+    public Boolean existsByName(String name) {
+        return repo.existsByName(name);
+    }
 }

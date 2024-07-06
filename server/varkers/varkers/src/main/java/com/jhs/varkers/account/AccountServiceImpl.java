@@ -62,4 +62,9 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccount(Long id) {
         dao.deleteAccount(id);
     }
+
+    @Override
+    public Boolean existsByName(String name) {
+        return dao.existsByName(name);
+    }
 }

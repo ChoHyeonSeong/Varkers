@@ -1,13 +1,23 @@
 <template>
-  <div>
-    <h1>홈 페이지</h1>
-    <router-link to="/signin">로그인</router-link> |
-    <router-link to="/signup">회원가입</router-link>
+  <div class="full-screen">
+    <div class="top-color-box symbolic-bg-color"> </div>
+    <div>
+      <home-navigation />
+    </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import HomeNavigation from '@/components/HomePage/HomeNavigation.vue';
 </script>
 
-<style scoped></style>
+<style scoped>
+.top-color-box {
+  height: 40%;
+}
+
+.full-screen {
+  height: 100vh;
+  width: 100vw;
+}
+</style>

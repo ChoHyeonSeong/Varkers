@@ -10,4 +10,5 @@ public interface AccountService {
     List<AccountDTO> readUserAccounts(Long userId);
     void updateAccount(AccountDTO dto);
     void deleteAccount(Long id);
+    Boolean existsByName(String name);
 }

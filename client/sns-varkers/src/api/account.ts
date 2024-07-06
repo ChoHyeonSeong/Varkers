@@ -19,6 +19,10 @@ function createAccount(accountData : RequestAccount){
     return account.post<ResponseAccount>('',accountData);
 }
 
+function checkName(name:string){
+    return account.get(`check?name=${name}`);
+}
+
 interface ResponseAccount{
     id:number;
     userId:number;
@@ -36,7 +40,7 @@ interface RequestAccount{
     description:string;
 }
 
-export {readAccount, readAccounts, readUserAccounts, createAccount};
+export {readAccount, readAccounts, readUserAccounts, createAccount, checkName};
 
 export type{
     ResponseAccount,
