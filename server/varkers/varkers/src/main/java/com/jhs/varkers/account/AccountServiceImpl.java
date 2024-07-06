@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,8 +19,9 @@ public class AccountServiceImpl implements AccountService {
     private final ListeningService listeningService;
 
     @Override
-    public void createAccount(AccountDTO dto) {
-        dao.createAccount(mapper.map(dto,AccountEntity.class));
+    public AccountDTO createAccount(AccountDTO dto) {
+        AccountEntity entity =  dao.createAccount(mapper.map(dto,AccountEntity.class));
+        return mapper.map(entity,AccountDTO.class);
     }
 
     @Override
@@ -27,6 +29,14 @@ public class AccountServiceImpl implements AccountService {
         AccountEntity entity = mapper.map(dto,AccountEntity.class);
         dao.createAccount(entity);
         return entity.getId();
+    }
+
+    @Override
+    public List<AccountDTO> readAccounts(List<Long> accountIds) {
+        return dao.readAccounts(accountIds)
+                .stream()
+                .map(e->mapper.map(e,AccountDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override

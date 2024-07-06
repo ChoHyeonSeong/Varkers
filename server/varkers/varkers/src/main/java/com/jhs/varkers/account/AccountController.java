@@ -12,16 +12,19 @@ public class AccountController {
     private final AccountService accountService;
 
     @PostMapping
-    public String createAccount(@RequestBody AccountDTO account){
-        accountService.createAccount(account);
-        return "OK";
+    public AccountDTO createAccount(@RequestBody AccountDTO account){
+        return accountService.createAccount(account);
     }
     @GetMapping("/{accountId}")
     public AccountDTO readAccount(@PathVariable Long accountId){
         return accountService.readAccount(accountId);
     }
+    @GetMapping
+    public List<AccountDTO> readAccounts(@RequestParam("accounts") List<Long> accountIds){
+        return accountService.readAccounts(accountIds);
+    }
     @GetMapping("/user/{userId}")
-    public List<AccountDTO> readUserAccounts(@PathVariable Long userId){
+    public List<AccountDTO> readUserAccountsByUserId(@PathVariable Long userId){
         return accountService.readUserAccounts(userId);
     }
 

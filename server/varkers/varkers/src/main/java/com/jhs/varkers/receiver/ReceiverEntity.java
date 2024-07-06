@@ -1,6 +1,6 @@
-package com.jhs.varkers.listening;
+package com.jhs.varkers.receiver;
 
-import com.jhs.varkers.account.AccountEntity;
+import com.jhs.varkers.vark.VarkEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "listening")
-public class ListeningEntity {
+@Table(name="receiver")
+public class ReceiverEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
+    private Long varkId;
     private Long accountId;
-    private Long listeningId;
 }

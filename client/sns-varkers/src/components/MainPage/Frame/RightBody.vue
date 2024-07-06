@@ -9,7 +9,7 @@ import UserEmail from '../UserEmail.vue';
 </script>
 
 <style scoped>
-.side-header-box{
+.side-header-box {
   width: 300px;
 }
 </style>

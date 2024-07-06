@@ -38,4 +38,9 @@ public class ListeningServiceImpl implements ListeningService{
     public void deleteByAccountIdAndListeningId(Long accountId, Long listeningId) {
         dao.deleteByAccountIdAndListeningId(accountId, listeningId);
     }
+
+    @Override
+    public boolean existsByAccountIdAndListeningId(Long accountId, Long listeningId) {
+        return dao.existsByAccountIdAndListeningId(accountId, listeningId);
+    }
 }

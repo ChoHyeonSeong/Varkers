@@ -41,7 +41,6 @@ const props = defineProps({
 }
 
 .modal-container {
-  width: 300px;
   margin: auto;
   padding: 20px 30px;
   background-color: #fff;

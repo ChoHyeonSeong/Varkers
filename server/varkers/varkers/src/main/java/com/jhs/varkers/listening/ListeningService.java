@@ -7,4 +7,5 @@ public interface ListeningService {
     List<ListeningDTO> readByListeningId(Long listeningId);
     ListeningDTO readByAccountIdAndListeningId(Long accountId,Long listeningId);
     void deleteByAccountIdAndListeningId(Long accountId,Long listeningId);
+    boolean existsByAccountIdAndListeningId(Long accountId,Long listeningId);
 }

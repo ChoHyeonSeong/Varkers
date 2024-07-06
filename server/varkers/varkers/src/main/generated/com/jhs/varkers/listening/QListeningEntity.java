@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,35 +17,24 @@ public class QListeningEntity extends EntityPathBase<ListeningEntity> {
 
     private static final long serialVersionUID = 799710105L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QListeningEntity listeningEntity = new QListeningEntity("listeningEntity");
 
-    public final com.jhs.varkers.account.QAccountEntity account;
+    public final NumberPath<Long> accountId = createNumber("accountId", Long.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final NumberPath<Long> listeningId = createNumber("listeningId", Long.class);
 
     public QListeningEntity(String variable) {
-        this(ListeningEntity.class, forVariable(variable), INITS);
+        super(ListeningEntity.class, forVariable(variable));
     }
 
     public QListeningEntity(Path<? extends ListeningEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QListeningEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QListeningEntity(PathMetadata metadata, PathInits inits) {
-        this(ListeningEntity.class, metadata, inits);
-    }
-
-    public QListeningEntity(Class<? extends ListeningEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.account = inits.isInitialized("account") ? new com.jhs.varkers.account.QAccountEntity(forProperty("account"), inits.get("account")) : null;
+        super(ListeningEntity.class, metadata);
     }
 
 }

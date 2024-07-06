@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { signInUser, type RequestUser } from "@/api/auth";
 import { useMainStore } from "./main";
 
-export const useUserStore = defineStore('sign', {
+export const useSignStore = defineStore('sign', {
     state: () => ({
         mainStore: useMainStore(),
     }),
@@ -18,7 +18,7 @@ export const useUserStore = defineStore('sign', {
             }
         },
         async signUpUser(userData:RequestUser) {
-            
+            await this.signUpUser(userData);
         }
     },
   });

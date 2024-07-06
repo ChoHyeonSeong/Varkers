@@ -9,4 +9,5 @@ public interface ListeningRepository extends JpaRepository<ListeningEntity,Long>
     List<ListeningEntity> findByListeningId(Long listeningId);
     ListeningEntity findOneByAccountIdAndListeningId(Long accountId,Long listeningId);
     void deleteByAccountIdAndListeningId(Long accountId,Long listeningId);
+    boolean existsByAccountIdAndListeningId(Long accountId,Long listeningId);
 }

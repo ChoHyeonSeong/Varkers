@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-center compose-box" v-if="showComposeBox"> 
+  <div class="flex-center compose-box" v-if="mainStore.showVarkComposeBox"> 
     <textarea class="compose-area" v-model="content"></textarea>
   </div>
   <div class="header-box flex-center" style="height: 30px" @click="toggleComposeBox">
@@ -12,13 +12,12 @@ import { useMainStore } from '@/stores/main';
 import { ref } from 'vue';
 const mainStore = useMainStore();
 
-const showComposeBox = ref(false);
 const content = ref('');
 
 async function toggleComposeBox() {
-  showComposeBox.value = !showComposeBox.value;
-  if(!showComposeBox.value && content.value!==''){
-    await mainStore.createVarkFromCurrentAccount(content.value);
+  mainStore.toggleVarkComposeBox();
+  if(!mainStore.showVarkComposeBox && content.value!==''){
+    await mainStore.createVark(content.value);
     initContent();
   }
 }
@@ -33,7 +32,7 @@ function initContent(){
   border: 1px solid black;
   margin: 10px;
   height: 180px;
-  width: 580px;
+  width: 95%;
 }
 .compose-box {
   height: 200px;
