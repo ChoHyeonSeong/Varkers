@@ -72,16 +72,8 @@ public class NotifyServiceImpl implements NotifyService {
         // sse 보내기
         VarkDTO sendDTO = varkService.readVark(varkId);
         List<Long> listenerList = getListeners(receiverService.readReceivers(varkId),sendDTO.getAccountId());
-        if(listenerList == null){
-            listenerList = new ArrayList<>();
-            listenerList.add(sendDTO.getAccountId());
-        }
-        System.out.println(listenerList);
-
-        listenerList.forEach(l->{
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@보낼 사람 계정ID = " + l+"@@@@@@@@@@@@@@@@@@@@@@@@");
-            sendToClient(l,sendDTO,SEND_CREATE_TYPE);
-        });
+        listenerList.add(sendDTO.getAccountId());
+        listenerList.forEach(l-> sendToClient(l,sendDTO,SEND_CREATE_TYPE));
     }
 
     private List<Long> getListeners(ReceiverDTO receiver, Long ownerId) {
@@ -99,7 +91,7 @@ public class NotifyServiceImpl implements NotifyService {
                     .stream()
                     .map(ListeningDTO::getAccountId)
                     .filter(otherListeners::contains)
-                    .toList();
+                    .collect(Collectors.toList());
         }else{
             listenerList = listeningService.readByListeningId(ownerId)
                     .stream()
