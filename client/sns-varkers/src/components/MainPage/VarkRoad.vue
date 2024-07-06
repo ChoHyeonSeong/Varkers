@@ -60,11 +60,9 @@ function createEventSource(accountId) {
       const receiver = await readReceiver(vark.id);
       let accounts = null;
       if (receiver.data.accountIds.length !== 0) {
-        console.log(receiver.data);
         const accountsRes = await readAccounts(receiver.data.accountIds);
         accounts = accountsRes.data;
       }
-      console.log(receiver);
       return {
         id: vark.id,
         account: account.data,

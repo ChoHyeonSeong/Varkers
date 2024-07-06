@@ -72,25 +72,34 @@ public class NotifyServiceImpl implements NotifyService {
         // sse 보내기
         VarkDTO sendDTO = varkService.readVark(varkId);
         List<Long> listenerList = getListeners(receiverService.readReceivers(varkId),sendDTO.getAccountId());
-        listenerList.add(sendDTO.getAccountId());
+        if(listenerList == null){
+            listenerList = new ArrayList<>();
+            listenerList.add(sendDTO.getAccountId());
+        }
+        System.out.println(listenerList);
+
         listenerList.forEach(l->{
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@보낼 사람 계정ID = " + l+"@@@@@@@@@@@@@@@@@@@@@@@@");
             sendToClient(l,sendDTO,SEND_CREATE_TYPE);
         });
     }
 
     private List<Long> getListeners(ReceiverDTO receiver, Long ownerId) {
         List<Long> listenerList;
-        if(receiver.getAccountIds().size() == 2){
-            // 리시버가 2명일 때에만(나와 상대) 상대방의 리스너 교집합에게만 보이게 만드는 로직
-            listenerList = new ArrayList<>();
-            Set<Long> aListeners = listeningService.readByListeningId(receiver.getAccountIds().get(0))
+        if(receiver.getAccountIds().size() == 1 && !receiver.getAccountIds().get(0).equals(ownerId)){
+            // 나와 상대방의 리스너 교집합에게만 보이게 만드는 로직
+            // 상대방의 listener를 가져와서 set에 저장
+            Set<Long> otherListeners = listeningService.readByListeningId(receiver.getAccountIds().get(0))
                     .stream()
                     .map(ListeningDTO::getAccountId)
                     .collect(Collectors.toSet());
-            listeningService.readByListeningId(receiver.getAccountIds().get(1)).forEach(l->{
-                if(aListeners.contains(l.getAccountId()))
-                    listenerList.add(l.getAccountId());
-            });
+            // 나의 listener를 가져와서 상대방의 listener set과 비교
+            // List 형으로 비교하면 너무 오래걸릴 것 같아서 해시값을 쓰는 set을 활용
+            listenerList = listeningService.readByListeningId(ownerId)
+                    .stream()
+                    .map(ListeningDTO::getAccountId)
+                    .filter(otherListeners::contains)
+                    .toList();
         }else{
             listenerList = listeningService.readByListeningId(ownerId)
                     .stream()

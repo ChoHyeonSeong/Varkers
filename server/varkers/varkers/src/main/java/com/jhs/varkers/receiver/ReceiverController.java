@@ -13,7 +13,7 @@ public class ReceiverController {
     private final ReceiverService service;
 
     @GetMapping("/{varkId}")
-    public ReceiverDTO readReceive(@PathVariable Long varkId) {
+    public ReceiverDTO readReceiver(@PathVariable Long varkId) {
         return service.readReceivers(varkId);
     }
 

@@ -53,15 +53,16 @@ async function registerVark() {
     };
     const responseVark = await createVark(varkData);
 
-    const accountIds = [varkStore.headVark.account.id];
-
-    for (const accountId in varkStore.headVark.receiver) {
-      accountIds.push(accountId);
+    const accountIds = new Set([varkStore.headVark.account.id]);
+    if (varkStore.headVark.receiver !== null) {
+      varkStore.headVark.receiver.forEach((r) => {
+        if (r.id !== mainStore.currentAccount.id) accountIds.add(r.id);
+      });
     }
 
     const receiverData = {
       varkId: responseVark.data.id,
-      accountIds: accountIds,
+      accountIds: Array.from(accountIds),
     };
 
     const receiver = await createReceiver(receiverData);

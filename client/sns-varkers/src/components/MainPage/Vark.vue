@@ -2,6 +2,8 @@
   <div class="flex receiver-box" v-if="data.receiver !== null">
     <template v-for="(receiver, i) in data.receiver" :key="i">
       <span>@{{ receiver.name }}</span>
+      <span>{{ i }}</span>
+      <span>{{ data.receiver.length }}</span>
     </template>
   </div>
   <div class="vark-box">

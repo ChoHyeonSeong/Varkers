@@ -60,9 +60,9 @@ public class VarkServiceImpl implements VarkService {
         return dao.readVarkRoad(listeningList)
                 .stream()
                 .filter(e-> {
-                    ReceiverDTO receiver = receiverService.readReceivers(e.getId());
-                    if(receiver.getAccountIds().size() == 1) {
-                        return listeningService.existsByAccountIdAndListeningId(accountId, receiver.getAccountIds().get(0));
+                    List<Long> receivers = receiverService.readReceivers(e.getId()).getAccountIds();
+                    if(receivers.size() == 1 && !receivers.get(0).equals(accountId)) {
+                        return listeningService.existsByAccountIdAndListeningId(accountId, receivers.get(0));
                     }
                     return true;
                 })
