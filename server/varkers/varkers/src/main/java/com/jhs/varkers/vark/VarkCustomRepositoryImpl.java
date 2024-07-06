@@ -15,8 +15,7 @@ public class VarkCustomRepositoryImpl implements VarkCustomRepository{
     public List<VarkEntity> findByListening(List<Long> listeningList) {
         return factory
                 .selectFrom(varkEntity)
-                .join(varkEntity.account, accountEntity)
-                .where(accountEntity.id.in(listeningList))
+                .where(varkEntity.accountId.in(listeningList))
                 .orderBy(varkEntity.id.desc())
                 .limit(50L)
                 .fetch();

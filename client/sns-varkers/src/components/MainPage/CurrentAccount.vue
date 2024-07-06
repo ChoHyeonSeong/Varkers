@@ -1,15 +1,17 @@
 <template>
-  <div class="flex-vertical-center account-box">
-    <div class="image-box symbolic-bg-color"></div>
-    <div>
-      <div class="nickname-box">{{ mainStore.currentAccount.nickname }}</div>
-      <div class="name-box">@{{ mainStore.currentAccount.name }}</div>
-    </div>
+  <div class="account-box" @click="mainStore.toggleUserAccounts">
+    <account :data="mainStore.currentAccount" />
   </div>
+  <user-accounts v-if="mainStore.showUserAccounts" />
+  <account-compose-modal />
 </template>
 
 <script setup>
 import { useMainStore } from '@/stores/main';
+import UserAccounts from './UserAccounts.vue';
+import Account from './Account.vue';
+import AccountComposeModal from './AccountComposeModal.vue';
+
 const mainStore = useMainStore();
 </script>
 

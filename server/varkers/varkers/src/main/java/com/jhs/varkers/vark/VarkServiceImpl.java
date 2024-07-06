@@ -1,12 +1,10 @@
 package com.jhs.varkers.vark;
 
-import com.jhs.varkers.account.AccountDAO;
-import com.jhs.varkers.account.AccountEntity;
-import com.jhs.varkers.account.AccountService;
 import com.jhs.varkers.listening.ListeningDTO;
-import com.jhs.varkers.listening.ListeningEntity;
 import com.jhs.varkers.listening.ListeningService;
-import com.jhs.varkers.notification.NotificationService;
+import com.jhs.varkers.notification.NotifyService;
+import com.jhs.varkers.receiver.ReceiverDTO;
+import com.jhs.varkers.receiver.ReceiverService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,25 +18,17 @@ import java.util.stream.Collectors;
 @Transactional
 public class VarkServiceImpl implements VarkService {
     private final VarkDAO dao;
-    private final NotificationService notificationService;
     private final ListeningService listeningService;
+    private final ReceiverService receiverService;
     private final ModelMapper mapper;
 
-    private static final String SEND_CREATE_TYPE = "create";
 
     @Override
-    public void createVark(VarkDTO dto) {
-        VarkEntity entity = mapper.map(dto,VarkEntity.class);
+    public VarkDTO createVark(VarkDTO dto) {
+        // 엔티티 생성
+        VarkEntity entity = mapper.map(dto, VarkEntity.class);
         dao.createVark(entity);
-        VarkDTO sendDTO = mapper.map(entity,VarkDTO.class);
-        List<Long> listenerList = listeningService.readByListeningId(sendDTO.getAccountId())
-                .stream()
-                .map(ListeningDTO::getAccountId)
-                .collect(Collectors.toList());
-        listenerList.add(sendDTO.getAccountId());
-        listenerList.forEach(l->{
-            notificationService.sendToClient(l,sendDTO,SEND_CREATE_TYPE);
-        });
+        return mapper.map(entity, VarkDTO.class);
     }
 
     @Override
@@ -69,6 +59,13 @@ public class VarkServiceImpl implements VarkService {
 
         return dao.readVarkRoad(listeningList)
                 .stream()
+                .filter(e-> {
+                    List<Long> receivers = receiverService.readReceivers(e.getId()).getAccountIds();
+                    if(receivers.size() == 1 && !receivers.get(0).equals(accountId)) {
+                        return listeningService.existsByAccountIdAndListeningId(accountId, receivers.get(0));
+                    }
+                    return true;
+                })
                 .map(e->mapper.map(e,VarkDTO.class))
                 .collect(Collectors.toList());
     }

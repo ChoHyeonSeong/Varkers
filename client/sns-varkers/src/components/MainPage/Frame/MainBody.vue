@@ -9,5 +9,4 @@ import VarkRoad from '../VarkRoad.vue';
 const mainStore = useMainStore();
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

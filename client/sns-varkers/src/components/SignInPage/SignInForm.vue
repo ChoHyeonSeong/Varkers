@@ -14,27 +14,21 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useMainStore } from '@/stores/main';
+import { useSignStore } from '@/stores/sign';
 import { useRouter } from 'vue-router';
-import { signInUser } from '@/api/auth';
 
 const email = ref('');
 const password = ref('');
+const signStore = useSignStore();
 const router = useRouter();
-const mainStore = useMainStore();
 
 async function submitForm() {
-  try {
-    const userData = {
-      email: email.value,
-      password: password.value,
-    };
-    const { data } = await signInUser(userData);
-    await mainStore.initMainStore(data.currentAccountId);
-    router.push('/main');
-  } catch (error) {
-    console.log(error);
-  }
+  const userData = {
+    email: email.value,
+    password: password.value,
+  };
+  const result = await signStore.signInUser(userData);
+  if (result === 'PASS') router.push('/main');
 }
 </script>
 

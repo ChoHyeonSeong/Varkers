@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,11 +17,9 @@ public class QVarkEntity extends EntityPathBase<VarkEntity> {
 
     private static final long serialVersionUID = -1253722817L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QVarkEntity varkEntity = new QVarkEntity("varkEntity");
 
-    public final com.jhs.varkers.account.QAccountEntity account;
+    public final NumberPath<Long> accountId = createNumber("accountId", Long.class);
 
     public final StringPath content = createString("content");
 
@@ -33,24 +30,15 @@ public class QVarkEntity extends EntityPathBase<VarkEntity> {
     public final DateTimePath<java.util.Date> updatedAt = createDateTime("updatedAt", java.util.Date.class);
 
     public QVarkEntity(String variable) {
-        this(VarkEntity.class, forVariable(variable), INITS);
+        super(VarkEntity.class, forVariable(variable));
     }
 
     public QVarkEntity(Path<? extends VarkEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QVarkEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QVarkEntity(PathMetadata metadata, PathInits inits) {
-        this(VarkEntity.class, metadata, inits);
-    }
-
-    public QVarkEntity(Class<? extends VarkEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.account = inits.isInitialized("account") ? new com.jhs.varkers.account.QAccountEntity(forProperty("account"), inits.get("account")) : null;
+        super(VarkEntity.class, metadata);
     }
 
 }

@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -17,8 +16,6 @@ import com.querydsl.core.types.dsl.PathInits;
 public class QAccountEntity extends EntityPathBase<AccountEntity> {
 
     private static final long serialVersionUID = 1220530109L;
-
-    private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QAccountEntity accountEntity = new QAccountEntity("accountEntity");
 
@@ -30,8 +27,6 @@ public class QAccountEntity extends EntityPathBase<AccountEntity> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final ListPath<com.jhs.varkers.listening.ListeningEntity, com.jhs.varkers.listening.QListeningEntity> listenings = this.<com.jhs.varkers.listening.ListeningEntity, com.jhs.varkers.listening.QListeningEntity>createList("listenings", com.jhs.varkers.listening.ListeningEntity.class, com.jhs.varkers.listening.QListeningEntity.class, PathInits.DIRECT2);
-
     public final StringPath name = createString("name");
 
     public final StringPath nickname = createString("nickname");
@@ -40,29 +35,18 @@ public class QAccountEntity extends EntityPathBase<AccountEntity> {
 
     public final DateTimePath<java.util.Date> updatedAt = createDateTime("updatedAt", java.util.Date.class);
 
-    public final com.jhs.varkers.user.QUserEntity user;
-
-    public final ListPath<com.jhs.varkers.vark.VarkEntity, com.jhs.varkers.vark.QVarkEntity> varks = this.<com.jhs.varkers.vark.VarkEntity, com.jhs.varkers.vark.QVarkEntity>createList("varks", com.jhs.varkers.vark.VarkEntity.class, com.jhs.varkers.vark.QVarkEntity.class, PathInits.DIRECT2);
+    public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
     public QAccountEntity(String variable) {
-        this(AccountEntity.class, forVariable(variable), INITS);
+        super(AccountEntity.class, forVariable(variable));
     }
 
     public QAccountEntity(Path<? extends AccountEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QAccountEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QAccountEntity(PathMetadata metadata, PathInits inits) {
-        this(AccountEntity.class, metadata, inits);
-    }
-
-    public QAccountEntity(Class<? extends AccountEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.user = inits.isInitialized("user") ? new com.jhs.varkers.user.QUserEntity(forProperty("user")) : null;
+        super(AccountEntity.class, metadata);
     }
 
 }

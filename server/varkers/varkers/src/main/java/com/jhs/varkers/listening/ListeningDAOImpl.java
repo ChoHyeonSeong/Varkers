@@ -29,4 +29,9 @@ public class ListeningDAOImpl implements ListeningDAO {
     public void deleteByAccountIdAndListeningId(Long accountId, Long listeningId) {
         listeningRepo.deleteByAccountIdAndListeningId(accountId, listeningId);
     }
+
+    @Override
+    public boolean existsByAccountIdAndListeningId(Long accountId, Long listeningId) {
+        return listeningRepo.existsByAccountIdAndListeningId(accountId, listeningId);
+    }
 }
